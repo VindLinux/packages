@@ -1,0 +1,24 @@
+{
+    "name": "wpa_supplicant",
+    "description": "Cross-platform supplicant for WPA, WPA2/RSN, and IEEE 802.1X, implementing key negotiation with a WPA authenticator and IEEE 802.11i/WPA/WPA2/WPA3 network authentication. Also includes wpa_cli and wpa_passphrase.",
+    "version": "2.11",
+    "dependencies": [
+        "openssl",
+        "libnl",
+        "readline"
+    ],
+    "download": [
+        "curl -fL --retry 3 --retry-delay 2 -o wpa_supplicant-2.11.tar.gz https://w1.fi/releases/wpa_supplicant-2.11.tar.gz",
+        "tar -xf wpa_supplicant-2.11.tar.gz"
+    ],
+    "build": [
+        "cd wpa_supplicant-2.11/wpa_supplicant && cat > .config << 'EOF'\nCONFIG_BACKEND=file\nCONFIG_CTRL_IFACE=y\nCONFIG_DEBUG_FILE=y\nCONFIG_DEBUG_SYSLOG=y\nCONFIG_DEBUG_SYSLOG_FACILITY=LOG_DAEMON\nCONFIG_DRIVER_NL80211=y\nCONFIG_DRIVER_WEXT=y\nCONFIG_DRIVER_WIRED=y\nCONFIG_EAP_FAST=y\nCONFIG_EAP_GTC=y\nCONFIG_EAP_LEAP=y\nCONFIG_EAP_MD5=y\nCONFIG_EAP_MSCHAPV2=y\nCONFIG_EAP_OTP=y\nCONFIG_EAP_PEAP=y\nCONFIG_EAP_PWD=y\nCONFIG_EAP_TLS=y\nCONFIG_EAP_TTLS=y\nCONFIG_IEEE8021X_EAPOL=y\nCONFIG_IPV6=y\nCONFIG_LIBNL32=y\nCONFIG_PKCS12=y\nCONFIG_READLINE=y\nCONFIG_SAE=y\nCONFIG_SMARTCARD=y\nCONFIG_WPS=y\nEOF",
+        "cd wpa_supplicant-2.11/wpa_supplicant && make BINDIR=\"$PREFIX/sbin\" LIBDIR=\"$PREFIX/lib\" $MAKEOPTS"
+    ],
+    "install": [
+        "cd wpa_supplicant-2.11/wpa_supplicant && install -d \"$DESTDIR$PREFIX/sbin\"",
+        "cd wpa_supplicant-2.11/wpa_supplicant && install -m755 wpa_supplicant wpa_cli wpa_passphrase \"$DESTDIR$PREFIX/sbin/\"",
+        "cd wpa_supplicant-2.11/wpa_supplicant && install -d \"$DESTDIR/etc/wpa_supplicant\"",
+        "cd wpa_supplicant-2.11/wpa_supplicant && install -m600 wpa_supplicant.conf \"$DESTDIR/etc/wpa_supplicant/wpa_supplicant.conf.example\""
+    ]
+}
