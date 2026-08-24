@@ -8,7 +8,7 @@
         "tar -xf parted-3.7.tar.xz"
     ],
     "build": [
-        "cd parted-3.7 && ./configure --prefix=\"$PREFIX\" --disable-nls --disable-device-mapper",
+        "cd parted-3.7 && ./configure --prefix=\"$PREFIX\" --disable-nls --disable-device-mapper --without-readline",
         "cd parted-3.7 && make $MAKEOPTS"
     ],
     "install": [

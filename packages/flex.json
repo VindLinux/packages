@@ -2,7 +2,9 @@
     "name": "flex",
     "description": "Fast lexical analyzer generator, producing programs that recognize lexical patterns in text; used alongside Bison by Mesa's build to generate GLSL and shader language lexers/parsers.",
     "version": "2.6.4",
-    "dependencies": [],
+    "dependencies": [
+        "m4"
+    ],
     "download": [
         "curl -fL --retry 3 --retry-delay 2 -o flex-2.6.4.tar.gz https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz",
         "tar -xf flex-2.6.4.tar.gz"

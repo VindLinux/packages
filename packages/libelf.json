@@ -4,7 +4,8 @@
     "version": "0.193",
     "dependencies": [
         "musl-fts",
-        "musl-obstack"
+        "musl-obstack",
+        "xz"
     ],
     "download": [
         "curl -fL --retry 3 --retry-delay 2 -o elfutils-0.193.tar.bz2 https://sourceware.org/elfutils/ftp/0.193/elfutils-0.193.tar.bz2",

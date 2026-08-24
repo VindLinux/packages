@@ -1,21 +1,23 @@
 {
     "name": "ca-certificates",
-    "description": "Set of trusted root TLS certificates in PEM format, generated via mk-ca-bundle.pl from the Mozilla NSS trust store, installed to /etc/ssl for use by TLS-enabled programs.",
-    "version": "3.106",
+    "description": "Common CA certificates: a bundle of Mozilla's trusted root Certificate Authority certificates, extracted and converted to PEM format, used by OpenSSL, curl, and other SSL/TLS applications to verify the authenticity of connections.",
+    "version": "2026-08-11",
     "dependencies": [
-        "curl",
-        "perl"
+        "openssl"
     ],
     "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o certdata.txt https://raw.githubusercontent.com/curl/curl/curl-8_10_1/lib/mk-ca-bundle.pl",
-        "curl -fL --retry 3 --retry-delay 2 -o certdata.txt.raw https://hg.mozilla.org/projects/nss/raw-file/NSS_3_106_RTM/lib/ckfw/builtins/certdata.txt"
+        "curl -fL --retry 3 --retry-delay 2 -o cacert.pem https://curl.se/ca/cacert.pem",
+        "curl -fL --retry 3 --retry-delay 2 -o cacert.pem.sha256 https://curl.se/ca/cacert.pem.sha256",
+        "sha256sum -c cacert.pem.sha256"
     ],
-    "build": [
-        "mkdir -p etc/ssl/certs",
-        "perl mk-ca-bundle.pl -n -u etc/ssl/certs/ca-certificates.crt"
-    ],
+    "build": [],
     "install": [
-        "install -d \"$DESTDIR$PREFIX/etc/ssl/certs\"",
-        "install -m 644 etc/ssl/certs/ca-certificates.crt \"$DESTDIR$PREFIX/etc/ssl/certs/ca-certificates.crt\""
+        "install -d \"$DESTDIR/etc/ssl/certs\"",
+        "install -d \"$DESTDIR/etc/pki/tls/certs\"",
+        "install -m 644 cacert.pem \"$DESTDIR/etc/ssl/certs/ca-certificates.crt\"",
+        "ln -sf ../../ssl/certs/ca-certificates.crt \"$DESTDIR/etc/pki/tls/certs/ca-bundle.crt\"",
+        "install -d \"$DESTDIR/etc/ssl/certs/mozilla\"",
+        "awk -v dir=\"$DESTDIR/etc/ssl/certs/mozilla\" 'BEGIN{n=0} /-----BEGIN CERTIFICATE-----/{n++; f=dir\"/cert\"n\".pem\"} {if (f) print > f} /-----END CERTIFICATE-----/{close(f); f=\"\"}' cacert.pem",
+        "for cert in \"$DESTDIR/etc/ssl/certs/mozilla\"/*.pem; do hash=$(openssl x509 -noout -hash -in \"$cert\"); ln -sf \"mozilla/$(basename \"$cert\")\" \"$DESTDIR/etc/ssl/certs/${hash}.0\"; done"
     ]
 }

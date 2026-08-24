@@ -12,6 +12,11 @@
         "cd ncurses-6.6 && make $MAKEOPTS"
     ],
     "install": [
-        "cd ncurses-6.6 && make DESTDIR=\"$DESTDIR\" install"
+        "cd ncurses-6.6 && make DESTDIR=\"$DESTDIR\" install",
+        "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lncursesw)\\n' > libncurses.so",
+        "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lformw)\\n' > libform.so",
+        "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lmenuw)\\n' > libmenu.so",
+        "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lpanelw)\\n' > libpanel.so",
+        "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lncursesw)\\n' > libcurses.so"
     ]
 }

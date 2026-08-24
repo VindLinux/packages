@@ -1,22 +1,20 @@
 {
     "name": "iwd",
-    "description": "Wireless daemon for Linux providing WiFi management via D-Bus, built on the ell (Embedded Linux Library) with minimal external dependencies.",
-    "version": "2.17",
+    "description": "iNet Wireless Daemon (iwd) is a minimalistic wireless daemon for Linux that uses modern kernel interfaces like cfg80211 and nl80211 (netlink). It provides a D-Bus API and the iwctl command-line client, and does not depend on wpa_supplicant.",
+    "version": "3.12",
     "dependencies": [
-        "autoconf",
-        "automake",
-        "libtool",
-        "pkgconf",
+        "dbus",
         "readline"
     ],
     "download": [
-        "git clone --depth 1 --branch 2.17 https://git.kernel.org/pub/scm/network/wireless/iwd.git"
+        "curl -fL --retry 3 --retry-delay 2 -o iwd-3.12.tar.xz https://www.kernel.org/pub/linux/network/wireless/iwd-3.12.tar.xz",
+        "tar -xf iwd-3.12.tar.xz"
     ],
     "build": [
-        "cd iwd && ./bootstrap-configure --prefix=\"$PREFIX\"",
-        "cd iwd && make $MAKEOPTS"
+        "cd iwd-3.12 && ./configure --prefix=\"$PREFIX\" --sysconfdir=/etc --localstatedir=/var --enable-client --disable-manual-pages --disable-systemd-service",
+        "cd iwd-3.12 && make $MAKEOPTS"
     ],
     "install": [
-        "cd iwd && make DESTDIR=\"$DESTDIR\" install"
+        "cd iwd-3.12 && make DESTDIR=\"$DESTDIR\" install"
     ]
 }
