@@ -1,6 +1,6 @@
 # GroveOS Packages
 
-Package recipes for [GroveOS](https://github.com/GroveOS/groveos), managed by [Lambda](https://github.com/GroveOS/lambda-manager).
+Package recipes for [GroveOS](https://github.com/Grove-OS/groveos), managed by [Lambda](https://github.com/Grove-OS/lambda-manager).
 
 ## Structure
 
