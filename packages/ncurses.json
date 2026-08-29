@@ -17,6 +17,7 @@
         "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lformw)\\n' > libform.so",
         "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lmenuw)\\n' > libmenu.so",
         "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lpanelw)\\n' > libpanel.so",
-        "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lncursesw)\\n' > libcurses.so"
+        "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lncursesw)\\n' > libcurses.so",
+        "cd \"$DESTDIR$PREFIX/lib/pkgconfig\" && ln -sf ncursesw.pc ncurses.pc"
     ]
 }

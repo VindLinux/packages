@@ -2,9 +2,7 @@
     "name": "busybox",
     "description": "Small static Unix userspace providing a shell and many common command-line utilities as a lightweight alternative to GNU userland tools.",
     "version": "1.37.0",
-    "dependencies": [
-        "bzip2"
-    ],
+    "dependencies": [],
     "download": [
         "curl -fL --retry 3 --retry-delay 2 -o busybox-1.37.0.tar.bz2 https://busybox.net/downloads/busybox-1.37.0.tar.bz2",
         "tar -xf busybox-1.37.0.tar.bz2"
