@@ -11,7 +11,7 @@
         "tar -xf iwd-3.12.tar.xz"
     ],
     "build": [
-        "cd iwd-3.12 && ./configure --prefix=\"$PREFIX\" --sysconfdir=/etc --localstatedir=/var --enable-client --disable-manual-pages --disable-systemd-service",
+        "cd iwd-3.12 && ./configure --prefix=\"$PREFIX\" --sysconfdir=/etc --localstatedir=/var --enable-client --disable-manual-pages --disable-systemd-service --with-dbus-datadir=\"$PREFIX/share/dbus-1\"",
         "cd iwd-3.12 && make $MAKEOPTS"
     ],
     "install": [
