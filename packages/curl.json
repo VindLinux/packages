@@ -10,7 +10,7 @@
         "tar -xf curl-8.18.0.tar.xz"
     ],
     "build": [
-        "cd curl-8.18.0 && ./configure --prefix=\"$PREFIX\" --disable-static --with-openssl --with-ca-path=/etc/ssl/certs",
+        "cd curl-8.18.0 && ./configure --prefix=\"$PREFIX\" --disable-static --with-openssl --with-ca-bundle=/etc/ssl/cert.pem --with-ca-path=/etc/ssl/certs",
         "cd curl-8.18.0 && make $MAKEOPTS"
     ],
     "install": [
