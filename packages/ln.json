@@ -1,0 +1,18 @@
+{
+    "name": "ln",
+    "description": "GNU ln utility for creating hard and symbolic links.",
+    "version": "9.7",
+    "dependencies": [],
+    "download": [
+        "curl -fL --retry 3 --retry-delay 2 -o coreutils-9.7.tar.xz https://ftp.gnu.org/gnu/coreutils/coreutils-9.7.tar.xz",
+        "tar -xf coreutils-9.7.tar.xz"
+    ],
+    "build": [
+        "cd coreutils-9.7 && ./configure --prefix=\"$PREFIX\" FORCE_UNSAFE_CONFIGURE=1",
+        "cd coreutils-9.7 && make $MAKEOPTS"
+    ],
+    "install": [
+        "mkdir -p \"$DESTDIR$PREFIX/bin\"",
+        "cp -v coreutils-9.7/src/ln \"$DESTDIR$PREFIX/bin/ln\""
+    ]
+}
