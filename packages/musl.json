@@ -12,6 +12,9 @@
         "cd musl-1.2.5 && make $MAKEOPTS"
     ],
     "install": [
-        "cd musl-1.2.5 && make DESTDIR=\"$DESTDIR\" install"
+        "cd musl-1.2.5 && make DESTDIR=\"$DESTDIR\" install",
+        "mkdir -p \"$DESTDIR$PREFIX/sbin\"",
+        "printf '#!/bin/sh\\nexit 0\\n' > \"$DESTDIR$PREFIX/sbin/ldconfig\"",
+        "chmod 0755 \"$DESTDIR$PREFIX/sbin/ldconfig\""
     ]
 }
