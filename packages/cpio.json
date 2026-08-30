@@ -8,7 +8,7 @@
         "tar -xf cpio-2.15.tar.gz"
     ],
     "build": [
-        "cd cpio-2.15 && ./configure --prefix=\"$PREFIX\"",
+        "cd cpio-2.15 && ./configure --prefix=\"$PREFIX\" CFLAGS=\"-std=gnu17 -O2\"",
         "cd cpio-2.15 && make $MAKEOPTS"
     ],
     "install": [
