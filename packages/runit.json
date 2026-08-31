@@ -13,13 +13,16 @@
     "install": [
         "cd admin/runit-2.3.1 && install -D -m 0755 command/chpst \"$DESTDIR$PREFIX/sbin/chpst\"",
         "cd admin/runit-2.3.1 && install -D -m 0755 command/runit \"$DESTDIR$PREFIX/sbin/runit\"",
+        "cd admin/runit-2.3.1 && install -D -m 0755 command/runit-init \"$DESTDIR$PREFIX/sbin/runit-init\"",
         "cd admin/runit-2.3.1 && install -D -m 0755 command/runsv \"$DESTDIR$PREFIX/sbin/runsv\"",
         "cd admin/runit-2.3.1 && install -D -m 0755 command/runsvchdir \"$DESTDIR$PREFIX/sbin/runsvchdir\"",
         "cd admin/runit-2.3.1 && install -D -m 0755 command/runsvdir \"$DESTDIR$PREFIX/sbin/runsvdir\"",
         "cd admin/runit-2.3.1 && install -D -m 0755 command/sv \"$DESTDIR$PREFIX/sbin/sv\"",
         "cd admin/runit-2.3.1 && install -D -m 0755 command/svlogd \"$DESTDIR$PREFIX/sbin/svlogd\"",
         "cd admin/runit-2.3.1 && install -D -m 0755 command/utmpset \"$DESTDIR$PREFIX/sbin/utmpset\"",
+        "mkdir -p \"$DESTDIR/etc/runit/runsvdir/default\"",
+        "mkdir -p \"$DESTDIR/etc/service\"",
         "mkdir -p \"$DESTDIR/sbin\"",
-        "ln -sf \"$PREFIX/sbin/runit\" \"$DESTDIR/sbin/init\""
+        "ln -sf \"$PREFIX/sbin/runit-init\" \"$DESTDIR/sbin/init\""
     ]
 }
