@@ -10,7 +10,7 @@
     "tar -xf libpciaccess-0.18.1.tar.xz"
   ],
   "build": [
-    "meson setup --prefix=\"$XORG_PREFIX\" --buildtype=release libpciaccess-0.18.1/build libpciaccess-0.18.1",
+    "meson setup --prefix=\"$XORG_PREFIX\" --libdir=\"$XORG_PREFIX/lib\" --buildtype=release libpciaccess-0.18.1/build libpciaccess-0.18.1",
     "ninja -C libpciaccess-0.18.1/build $MAKEOPTS"
   ],
   "install": [

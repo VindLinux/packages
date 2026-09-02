@@ -13,7 +13,7 @@
         "tar -xf dbus-1.16.2.tar.xz"
     ],
     "build": [
-        "cd dbus-1.16.2 && meson setup --prefix=\"$PREFIX\" --sysconfdir=/etc --localstatedir=/var --buildtype=release --wrap-mode=nofallback -Dsystemd=disabled -Dselinux=disabled build",
+        "cd dbus-1.16.2 && meson setup --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --sysconfdir=/etc --localstatedir=/var --buildtype=release --wrap-mode=nofallback -Dsystemd=disabled -Dselinux=disabled build",
         "cd dbus-1.16.2 && ninja -C build"
     ],
     "install": [

@@ -13,7 +13,7 @@
         "tar -xf usbutils-018.tar.gz"
     ],
     "build": [
-        "meson setup usbutils-018/build usbutils-018 --prefix=\"$PREFIX\" --buildtype=release --wrap-mode=nodownload -D udevdir=\"$PREFIX/lib/udev\"",
+        "meson setup usbutils-018/build usbutils-018 --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release --wrap-mode=nodownload -D udevdir=\"$PREFIX/lib/udev\"",
         "ninja -C usbutils-018/build $MAKEOPTS"
     ],
     "install": [

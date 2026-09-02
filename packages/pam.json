@@ -13,7 +13,7 @@
         "tar -xf Linux-PAM-1.7.2.tar.xz"
     ],
     "build": [
-        "cd Linux-PAM-1.7.2 && meson setup build --prefix=\"$PREFIX\" --buildtype=release -Ddocs=disabled -Daudit=disabled -Dselinux=disabled -Dlogind=disabled -Delogind=disabled -Dopenssl=disabled -Dnis=disabled -Dpam_lastlog=disabled",
+        "cd Linux-PAM-1.7.2 && meson setup build --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release -Ddocs=disabled -Daudit=disabled -Dselinux=disabled -Dlogind=disabled -Delogind=disabled -Dopenssl=disabled -Dnis=disabled -Dpam_lastlog=disabled",
         "cd Linux-PAM-1.7.2 && ninja -C build"
     ],
     "install": [

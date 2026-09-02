@@ -12,7 +12,7 @@
         "tar -xf wayland-1.25.0.tar.xz"
     ],
     "build": [
-        "meson setup wayland-1.25.0/build wayland-1.25.0 --prefix=\"$PREFIX\" --buildtype=release -Ddocumentation=false --wrap-mode=nodownload",
+        "meson setup wayland-1.25.0/build wayland-1.25.0 --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release -Ddocumentation=false --wrap-mode=nodownload",
         "ninja -C wayland-1.25.0/build $MAKEOPTS"
     ],
     "install": [

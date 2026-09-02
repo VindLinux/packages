@@ -15,7 +15,7 @@
         "tar -xf util-linux-2.40.2.tar.gz"
     ],
     "build": [
-        "meson setup util-linux-2.40.2/build util-linux-2.40.2 --prefix=\"$PREFIX\" --buildtype=release --wrap-mode=nodownload -D build-login=disabled -D build-su=disabled -D build-runuser=disabled",
+        "meson setup util-linux-2.40.2/build util-linux-2.40.2 --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release --wrap-mode=nodownload -D build-login=disabled -D build-su=disabled -D build-runuser=disabled",
         "ninja -C util-linux-2.40.2/build $MAKEOPTS"
     ],
     "install": [

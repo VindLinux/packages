@@ -8,7 +8,7 @@
         "tar -xf iputils-20250605.tar.gz"
     ],
     "build": [
-        "cd iputils-20250605 && meson setup build --prefix=\"$PREFIX\"",
+        "cd iputils-20250605 && meson setup build --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\"",
         "cd iputils-20250605 && ninja -C build"
     ],
     "install": [

@@ -8,7 +8,7 @@
         "tar -xf argp-standalone-1.5.0.tar.gz"
     ],
     "build": [
-        "cd argp-standalone-1.5.0 && meson setup build --prefix=\"$PREFIX\" --buildtype=release",
+        "cd argp-standalone-1.5.0 && meson setup build --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release",
         "cd argp-standalone-1.5.0 && ninja -C build"
     ],
     "install": [

@@ -13,7 +13,7 @@
     "tar -xf libdrm-2.4.134.tar.xz"
   ],
   "build": [
-    "meson setup --prefix=\"$XORG_PREFIX\" --buildtype=release -Dudev=true -Dvalgrind=disabled libdrm-2.4.134/build libdrm-2.4.134",
+    "meson setup --prefix=\"$XORG_PREFIX\" --libdir=\"$XORG_PREFIX/lib\" --buildtype=release -Dudev=true -Dvalgrind=disabled libdrm-2.4.134/build libdrm-2.4.134",
     "ninja -C libdrm-2.4.134/build $MAKEOPTS"
   ],
   "install": [

@@ -10,7 +10,7 @@
         "tar -xf xorgproto-2025.1.tar.xz"
     ],
     "build": [
-        "meson setup xorgproto-2025.1/build xorgproto-2025.1 --prefix=\"$XORG_PREFIX\" --buildtype=release --wrap-mode=nodownload",
+        "meson setup xorgproto-2025.1/build xorgproto-2025.1 --prefix=\"$XORG_PREFIX\" --libdir=\"$XORG_PREFIX/lib\" --buildtype=release --wrap-mode=nodownload",
         "ninja -C xorgproto-2025.1/build $MAKEOPTS"
     ],
     "install": [

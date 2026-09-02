@@ -12,7 +12,7 @@
         "tar -xf procps-ng-4.0.4.tar.xz"
     ],
     "build": [
-        "meson setup procps-v4.0.4/build procps-v4.0.4 --prefix=\"$PREFIX\" --buildtype=release --wrap-mode=nodownload",
+        "meson setup procps-v4.0.4/build procps-v4.0.4 --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release --wrap-mode=nodownload",
         "ninja -C procps-v4.0.4/build $MAKEOPTS"
     ],
     "install": [

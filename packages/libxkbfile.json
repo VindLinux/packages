@@ -11,7 +11,7 @@
     "tar -xf libxkbfile-1.2.0.tar.xz"
   ],
   "build": [
-    "meson setup --prefix=\"$XORG_PREFIX\" --buildtype=release libxkbfile-1.2.0/build libxkbfile-1.2.0",
+    "meson setup --prefix=\"$XORG_PREFIX\" --libdir=\"$XORG_PREFIX/lib\" --buildtype=release libxkbfile-1.2.0/build libxkbfile-1.2.0",
     "ninja -C libxkbfile-1.2.0/build $MAKEOPTS"
   ],
   "install": [
