@@ -9,8 +9,8 @@
     ],
     "build": [
         "cd busybox-1.37.0 && make defconfig",
-        "cd busybox-1.37.0 && sed -i -e 's/^# CONFIG_STATIC is not set/CONFIG_STATIC=y/' -e 's/^# CONFIG_ASH is not set/CONFIG_ASH=y/' -e 's/^# CONFIG_SH_IS_ASH is not set/CONFIG_SH_IS_ASH=y/' -e 's/^# CONFIG_AWK is not set/CONFIG_AWK=y/' -e 's/^# CONFIG_SED is not set/CONFIG_SED=y/' -e 's/^# CONFIG_TR is not set/CONFIG_TR=y/' -e 's/^# CONFIG_EXPR is not set/CONFIG_EXPR=y/' -e 's/^# CONFIG_CUT is not set/CONFIG_CUT=y/' -e 's/^# CONFIG_SORT is not set/CONFIG_SORT=y/' -e 's/^# CONFIG_HEAD is not set/CONFIG_HEAD=y/' -e 's/^# CONFIG_TAIL is not set/CONFIG_TAIL=y/' -e 's/^# CONFIG_WC is not set/CONFIG_WC=y/' -e 's/^CONFIG_TC=y/# CONFIG_TC is not set/' .config",
-        "cd busybox-1.37.0 && make clean && CC=/usr/bin/x86_64-pc-linux-musl-gcc AR=/usr/bin/ar RANLIB=/usr/bin/ranlib STRIP=/usr/bin/strip CFLAGS='--sysroot=/' LDFLAGS='--sysroot=/' make $MAKEOPTS"
+        "cd busybox-1.37.0 && sed -i -e 's/^# CONFIG_STATIC is not set/CONFIG_STATIC=y/' -e 's/^# CONFIG_ASH is not set/CONFIG_ASH=y/' -e 's/^# CONFIG_SH_IS_ASH is not set/CONFIG_SH_IS_ASH=y/' -e 's/^# CONFIG_AWK is not set/CONFIG_AWK=y/' -e 's/^# CONFIG_SED is not set/CONFIG_SED=y/' -e 's/^# CONFIG_TR is not set/CONFIG_TR=y/' -e 's/^# CONFIG_EXPR is not set/CONFIG_EXPR=y/' -e 's/^# CONFIG_CUT is not set/CONFIG_CUT=y/' -e 's/^# CONFIG_SORT is not set/CONFIG_SORT=y/' -e 's/^# CONFIG_HEAD is not set/CONFIG_HEAD=y/' -e 's/^# CONFIG_TAIL is not set/CONFIG_TAIL=y/' -e 's/^# CONFIG_WC is not set/CONFIG_WC=y/' -e 's/^# CONFIG_NTPD is not set/CONFIG_NTPD=y/' -e 's/^CONFIG_TC=y/# CONFIG_TC is not set/' .config",
+        "cd busybox-1.37.0 && make clean && CC=\"$CC\" AR=/usr/bin/ar RANLIB=/usr/bin/ranlib STRIP=/usr/bin/strip make $MAKEOPTS"
     ],
     "install": [
         "mkdir -p \"$DESTDIR$PREFIX/bin\"",
