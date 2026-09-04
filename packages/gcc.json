@@ -15,8 +15,8 @@
     ],
     "build": [
         "cd gcc-15.2.0 && mkdir -v build",
-        "cd gcc-15.2.0/build && ../configure --prefix=\"$PREFIX\" --with-gmp=\"$PREFIX\" --with-mpfr=\"$PREFIX\" --with-mpc=\"$PREFIX\" LD=ld --enable-languages=c,c++ --enable-default-pie --enable-default-ssp --enable-host-pie --disable-multilib --disable-bootstrap --disable-fixincludes --with-system-zlib",
-        "cd gcc-15.2.0/build && make $MAKEOPTS"
+        "cd gcc-15.2.0/build && unset CFLAGS CXXFLAGS && ../configure --prefix=\"$PREFIX\" --with-gmp=\"$PREFIX\" --with-mpfr=\"$PREFIX\" --with-mpc=\"$PREFIX\" LD=ld --enable-languages=c,c++ --enable-default-pie --enable-default-ssp --enable-host-pie --disable-multilib --disable-bootstrap --disable-fixincludes --with-system-zlib",
+        "cd gcc-15.2.0/build && unset CFLAGS CXXFLAGS && make $MAKEOPTS"
     ],
     "install": [
         "cd gcc-15.2.0/build && make DESTDIR=\"$DESTDIR\" install"
