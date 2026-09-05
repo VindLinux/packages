@@ -12,7 +12,7 @@
         "tar -xf llvm-project-21.1.8.src.tar.xz"
     ],
     "build": [
-        "unset CXXFLAGS CFLAGS LDFLAGS; cmake -G Ninja -S llvm-project-21.1.8.src/runtimes -B llvm-project-21.1.8.src/runtimes/build -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=\"$PREFIX\" -D LLVM_ENABLE_RUNTIMES='libunwind;libcxx;libcxxabi' -D LLVM_DIR=\"$PREFIX/lib/cmake/llvm\" -D LIBCXXABI_USE_LLVM_UNWINDER=ON -D LIBCXX_CXX_ABI=libcxxabi -D LIBCXX_HAS_MUSL_LIBC=ON",
+        "unset CXXFLAGS CFLAGS LDFLAGS; cmake -G Ninja -S llvm-project-21.1.8.src/runtimes -B llvm-project-21.1.8.src/runtimes/build -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=\"$PREFIX\" -D LLVM_ENABLE_RUNTIMES='libunwind;libcxx;libcxxabi' -D LLVM_DIR=\"$PREFIX/lib/cmake/llvm\" -D LIBCXXABI_USE_LLVM_UNWINDER=ON -D LIBCXX_CXX_ABI=libcxxabi -D LIBCXX_HAS_MUSL_LIBC=ON -D CMAKE_C_COMPILER_WORKS=ON -D CMAKE_CXX_COMPILER_WORKS=ON",
         "unset CXXFLAGS CFLAGS LDFLAGS; ninja -C llvm-project-21.1.8.src/runtimes/build $MAKEOPTS"
     ],
     "install": [
