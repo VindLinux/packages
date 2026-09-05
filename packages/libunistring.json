@@ -4,7 +4,7 @@
 	"version": "1.4.2",
 	"dependencies": [],
 	"download": [
-		"curl -fL --retry 3 --retry-delay 2 -o libunistring-1.4.2.tar.xz https://ftpmirror.gnu.org/libunistring/libunistring-1.4.2.tar.xz",
+		"curl -fL --retry 3 --retry-delay 2 -o libunistring-1.4.2.tar.xz https://ftp.gnu.org/gnu/libunistring/libunistring-1.4.2.tar.xz",
 		"tar -xf libunistring-1.4.2.tar.xz"
 	],
 	"build": [

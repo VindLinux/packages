@@ -6,7 +6,7 @@
         "autoconf"
     ],
     "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o automake-1.18.1.tar.xz https://ftpmirror.gnu.org/automake/automake-1.18.1.tar.xz",
+        "curl -fL --retry 3 --retry-delay 2 -o automake-1.18.1.tar.xz https://ftp.gnu.org/gnu/automake/automake-1.18.1.tar.xz",
         "tar -xf automake-1.18.1.tar.xz"
     ],
     "build": [

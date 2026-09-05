@@ -4,7 +4,7 @@
     "version": "1.0",
     "dependencies": [],
     "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o gettext-1.0.tar.xz https://ftpmirror.gnu.org/gettext/gettext-1.0.tar.xz",
+        "curl -fL --retry 3 --retry-delay 2 -o gettext-1.0.tar.xz https://ftp.gnu.org/gnu/gettext/gettext-1.0.tar.xz",
         "tar -xf gettext-1.0.tar.xz"
     ],
     "build": [

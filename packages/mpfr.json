@@ -6,7 +6,7 @@
         "gmp"
     ],
     "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o mpfr-4.2.2.tar.xz https://ftpmirror.gnu.org/mpfr/mpfr-4.2.2.tar.xz",
+        "curl -fL --retry 3 --retry-delay 2 -o mpfr-4.2.2.tar.xz https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.2.tar.xz",
         "tar -xf mpfr-4.2.2.tar.xz"
     ],
     "build": [

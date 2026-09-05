@@ -4,7 +4,7 @@
     "version": "6.3.0",
     "dependencies": [],
     "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o gmp-6.3.0.tar.xz https://ftpmirror.gnu.org/gmp/gmp-6.3.0.tar.xz",
+        "curl -fL --retry 3 --retry-delay 2 -o gmp-6.3.0.tar.xz https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz",
         "tar -xf gmp-6.3.0.tar.xz"
     ],
     "build": [

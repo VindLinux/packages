@@ -4,7 +4,7 @@
     "version": "4.11.0",
     "dependencies": [],
     "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o findutils-4.11.0.tar.xz https://ftpmirror.gnu.org/findutils/findutils-4.11.0.tar.xz",
+        "curl -fL --retry 3 --retry-delay 2 -o findutils-4.11.0.tar.xz https://ftp.gnu.org/gnu/findutils/findutils-4.11.0.tar.xz",
         "tar -xf findutils-4.11.0.tar.xz"
     ],
     "build": [

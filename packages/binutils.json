@@ -6,7 +6,7 @@
         "zlib"
     ],
     "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o binutils-2.45.tar.xz https://ftpmirror.gnu.org/binutils/binutils-2.45.tar.xz",
+        "curl -fL --retry 3 --retry-delay 2 -o binutils-2.45.tar.xz https://ftp.gnu.org/gnu/binutils/binutils-2.45.tar.xz",
         "tar -xf binutils-2.45.tar.xz"
     ],
     "build": [
