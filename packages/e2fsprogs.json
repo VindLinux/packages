@@ -1,17 +1,22 @@
 {
-    "name": "e2fsprogs",
-    "description": "Set of utilities for creating, checking, resizing, and maintaining ext2/ext3/ext4 filesystems, including mkfs.ext4, e2fsck, resize2fs, and libext2fs.",
-    "version": "1.47.1",
-    "dependencies": ["util-linux"],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o e2fsprogs-1.47.1.tar.gz https://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs/v1.47.1/e2fsprogs-1.47.1.tar.gz",
-        "tar -xf e2fsprogs-1.47.1.tar.gz"
-    ],
-    "build": [
-        "cd e2fsprogs-1.47.1 && CFLAGS=\"$CFLAGS -std=gnu11\" ./configure --prefix=\"$PREFIX\" --enable-elf-shlibs --disable-libblkid --disable-libuuid --disable-fsck",
-        "cd e2fsprogs-1.47.1 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd e2fsprogs-1.47.1 && make DESTDIR=\"$DESTDIR\" install install-libs"
-    ]
+  "name": "e2fsprogs",
+  "description": "Set of utilities for creating, checking, resizing, and maintaining ext2/ext3/ext4 filesystems, including mkfs.ext4, e2fsck, resize2fs, and libext2fs.",
+  "version": "1.47.1",
+  "dependencies": [
+    "util-linux"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o e2fsprogs-1.47.1.tar.gz https://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs/v1.47.1/e2fsprogs-1.47.1.tar.gz",
+    "tar -xf e2fsprogs-1.47.1.tar.gz"
+  ],
+  "build": [
+    "cd e2fsprogs-1.47.1 && CFLAGS=\"$CFLAGS -std=gnu11\" ./configure --prefix=\"$PREFIX\" --enable-elf-shlibs --disable-libblkid --disable-libuuid --disable-fsck",
+    "cd e2fsprogs-1.47.1 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd e2fsprogs-1.47.1 && make DESTDIR=\"$DESTDIR\" install install-libs"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

@@ -1,19 +1,22 @@
 {
-	"name": "libidn2",
-	"description": "Library implementing IDNA2008, Punycode, and Unicode TR46 for handling internationalized domain names.",
-	"version": "2.3.8",
-	"dependencies": [
-		"libunistring"
-	],
-	"download": [
-		"curl -fL --retry 3 --retry-delay 2 -o libidn2-2.3.8.tar.gz https://ftp.gnu.org/gnu/libidn/libidn2-2.3.8.tar.gz",
-		"tar -xf libidn2-2.3.8.tar.gz"
-	],
-	"build": [
-		"cd libidn2-2.3.8 && ./configure --prefix=\"$PREFIX\" --disable-static",
-		"cd libidn2-2.3.8 && make $MAKEOPTS"
-	],
-	"install": [
-		"cd libidn2-2.3.8 && make DESTDIR=\"$DESTDIR\" install"
-	]
+  "name": "libidn2",
+  "description": "Library implementing IDNA2008, Punycode, and Unicode TR46 for handling internationalized domain names.",
+  "version": "2.3.8",
+  "dependencies": [
+    "libunistring"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o libidn2-2.3.8.tar.gz https://ftp.gnu.org/gnu/libidn/libidn2-2.3.8.tar.gz",
+    "tar -xf libidn2-2.3.8.tar.gz"
+  ],
+  "build": [
+    "cd libidn2-2.3.8 && ./configure --prefix=\"$PREFIX\" --disable-static",
+    "cd libidn2-2.3.8 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd libidn2-2.3.8 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

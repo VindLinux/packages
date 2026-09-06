@@ -1,17 +1,20 @@
 {
-    "name": "diffutils",
-    "description": "GNU utilities for comparing and finding differences between files, including diff, cmp, diff3, and sdiff.",
-    "version": "3.12",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o diffutils-3.12.tar.xz https://ftp.gnu.org/gnu/diffutils/diffutils-3.12.tar.xz",
-        "tar -xf diffutils-3.12.tar.xz"
-    ],
-    "build": [
-        "cd diffutils-3.12 && ./configure --prefix=\"$PREFIX\"",
-        "cd diffutils-3.12 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd diffutils-3.12 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "diffutils",
+  "description": "GNU utilities for comparing and finding differences between files, including diff, cmp, diff3, and sdiff.",
+  "version": "3.12",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o diffutils-3.12.tar.xz https://ftp.gnu.org/gnu/diffutils/diffutils-3.12.tar.xz",
+    "tar -xf diffutils-3.12.tar.xz"
+  ],
+  "build": [
+    "cd diffutils-3.12 && ./configure --prefix=\"$PREFIX\"",
+    "cd diffutils-3.12 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd diffutils-3.12 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

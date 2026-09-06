@@ -1,17 +1,20 @@
 {
-    "name": "dash",
-    "description": "Small, fast POSIX-compliant shell derived from ash, used as a lightweight non-GNU alternative to bash for scripting and /bin/sh.",
-    "version": "0.5.12",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o dash-0.5.12.tar.gz http://gondor.apana.org.au/~herbert/dash/files/dash-0.5.12.tar.gz",
-        "tar -xf dash-0.5.12.tar.gz"
-    ],
-    "build": [
-        "cd dash-0.5.12 && ./configure --prefix=\"$PREFIX\"",
-        "cd dash-0.5.12 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd dash-0.5.12 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "dash",
+  "description": "Small, fast POSIX-compliant shell derived from ash, used as a lightweight non-GNU alternative to bash for scripting and /bin/sh.",
+  "version": "0.5.12",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o dash-0.5.12.tar.gz http://gondor.apana.org.au/~herbert/dash/files/dash-0.5.12.tar.gz",
+    "tar -xf dash-0.5.12.tar.gz"
+  ],
+  "build": [
+    "cd dash-0.5.12 && ./configure --prefix=\"$PREFIX\"",
+    "cd dash-0.5.12 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd dash-0.5.12 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

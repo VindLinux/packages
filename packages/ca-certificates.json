@@ -1,23 +1,26 @@
 {
-    "name": "ca-certificates",
-    "description": "Common CA certificates: a bundle of Mozilla's trusted root Certificate Authority certificates, extracted and converted to PEM format, used by OpenSSL, curl, and other SSL/TLS applications to verify the authenticity of connections.",
-    "version": "2026-08-11",
-    "dependencies": [
-        "openssl"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o cacert.pem https://curl.se/ca/cacert.pem",
-        "curl -fL --retry 3 --retry-delay 2 -o cacert.pem.sha256 https://curl.se/ca/cacert.pem.sha256",
-        "sha256sum -c cacert.pem.sha256"
-    ],
-    "build": [],
-    "install": [
-        "install -d \"$DESTDIR/etc/ssl/certs\"",
-        "install -d \"$DESTDIR/etc/pki/tls/certs\"",
-        "install -m 644 cacert.pem \"$DESTDIR/etc/ssl/certs/ca-certificates.crt\"",
-        "ln -sf ../../ssl/certs/ca-certificates.crt \"$DESTDIR/etc/pki/tls/certs/ca-bundle.crt\"",
-        "install -d \"$DESTDIR/etc/ssl/certs/mozilla\"",
-        "awk -v dir=\"$DESTDIR/etc/ssl/certs/mozilla\" 'BEGIN{n=0} /-----BEGIN CERTIFICATE-----/{n++; f=dir\"/cert\"n\".pem\"} {if (f) print > f} /-----END CERTIFICATE-----/{close(f); f=\"\"}' cacert.pem",
-        "for cert in \"$DESTDIR/etc/ssl/certs/mozilla\"/*.pem; do hash=$(openssl x509 -noout -hash -in \"$cert\"); ln -sf \"mozilla/$(basename \"$cert\")\" \"$DESTDIR/etc/ssl/certs/${hash}.0\"; done"
-    ]
+  "name": "ca-certificates",
+  "description": "Common CA certificates: a bundle of Mozilla's trusted root Certificate Authority certificates, extracted and converted to PEM format, used by OpenSSL, curl, and other SSL/TLS applications to verify the authenticity of connections.",
+  "version": "2026-08-11",
+  "dependencies": [
+    "openssl"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o cacert.pem https://curl.se/ca/cacert.pem",
+    "curl -fL --retry 3 --retry-delay 2 -o cacert.pem.sha256 https://curl.se/ca/cacert.pem.sha256",
+    "sha256sum -c cacert.pem.sha256"
+  ],
+  "build": [],
+  "install": [
+    "install -d \"$DESTDIR/etc/ssl/certs\"",
+    "install -d \"$DESTDIR/etc/pki/tls/certs\"",
+    "install -m 644 cacert.pem \"$DESTDIR/etc/ssl/certs/ca-certificates.crt\"",
+    "ln -sf ../../ssl/certs/ca-certificates.crt \"$DESTDIR/etc/pki/tls/certs/ca-bundle.crt\"",
+    "install -d \"$DESTDIR/etc/ssl/certs/mozilla\"",
+    "awk -v dir=\"$DESTDIR/etc/ssl/certs/mozilla\" 'BEGIN{n=0} /-----BEGIN CERTIFICATE-----/{n++; f=dir\"/cert\"n\".pem\"} {if (f) print > f} /-----END CERTIFICATE-----/{close(f); f=\"\"}' cacert.pem",
+    "for cert in \"$DESTDIR/etc/ssl/certs/mozilla\"/*.pem; do hash=$(openssl x509 -noout -hash -in \"$cert\"); ln -sf \"mozilla/$(basename \"$cert\")\" \"$DESTDIR/etc/ssl/certs/${hash}.0\"; done"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

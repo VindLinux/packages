@@ -1,19 +1,22 @@
 {
-    "name": "sqlite3",
-    "description": "Self-contained, serverless, zero-configuration, transactional SQL database engine, including the sqlite3 command-line shell and the libsqlite3 C library.",
-    "version": "3.53.4",
-    "dependencies": [
-        "readline"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o sqlite-autoconf-3530400.tar.gz https://sqlite.org/2026/sqlite-autoconf-3530400.tar.gz",
-        "tar -xf sqlite-autoconf-3530400.tar.gz"
-    ],
-    "build": [
-        "cd sqlite-autoconf-3530400 && CPPFLAGS=\"-DSQLITE_ENABLE_FTS5 -DSQLITE_ENABLE_FTS4 -DSQLITE_ENABLE_RTREE -DSQLITE_ENABLE_JSON1 -DSQLITE_ENABLE_COLUMN_METADATA -DSQLITE_ENABLE_UNLOCK_NOTIFY -DSQLITE_ENABLE_DBSTAT_VTAB -DSQLITE_SECURE_DELETE\" ./configure --prefix=\"$PREFIX\" --enable-readline --disable-static",
-        "cd sqlite-autoconf-3530400 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd sqlite-autoconf-3530400 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "sqlite3",
+  "description": "Self-contained, serverless, zero-configuration, transactional SQL database engine, including the sqlite3 command-line shell and the libsqlite3 C library.",
+  "version": "3.53.4",
+  "dependencies": [
+    "readline"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o sqlite-autoconf-3530400.tar.gz https://sqlite.org/2026/sqlite-autoconf-3530400.tar.gz",
+    "tar -xf sqlite-autoconf-3530400.tar.gz"
+  ],
+  "build": [
+    "cd sqlite-autoconf-3530400 && CPPFLAGS=\"-DSQLITE_ENABLE_FTS5 -DSQLITE_ENABLE_FTS4 -DSQLITE_ENABLE_RTREE -DSQLITE_ENABLE_JSON1 -DSQLITE_ENABLE_COLUMN_METADATA -DSQLITE_ENABLE_UNLOCK_NOTIFY -DSQLITE_ENABLE_DBSTAT_VTAB -DSQLITE_SECURE_DELETE\" ./configure --prefix=\"$PREFIX\" --enable-readline --disable-static",
+    "cd sqlite-autoconf-3530400 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd sqlite-autoconf-3530400 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

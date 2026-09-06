@@ -1,17 +1,22 @@
 {
-    "name": "argp-standalone",
-    "description": "Hierarchical argument parsing library and error compatibility for musl",
-    "version": "1.5.0",
-    "dependencies": ["meson"],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o argp-standalone-1.5.0.tar.gz https://github.com/argp-standalone/argp-standalone/archive/refs/tags/1.5.0.tar.gz",
-        "tar -xf argp-standalone-1.5.0.tar.gz"
-    ],
-    "build": [
-        "cd argp-standalone-1.5.0 && meson setup build --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release",
-        "cd argp-standalone-1.5.0 && ninja -C build"
-    ],
-    "install": [
-        "cd argp-standalone-1.5.0 && DESTDIR=\"$DESTDIR\" ninja -C build install"
-    ]
+  "name": "argp-standalone",
+  "description": "Hierarchical argument parsing library and error compatibility for musl",
+  "version": "1.5.0",
+  "dependencies": [
+    "meson"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o argp-standalone-1.5.0.tar.gz https://github.com/argp-standalone/argp-standalone/archive/refs/tags/1.5.0.tar.gz",
+    "tar -xf argp-standalone-1.5.0.tar.gz"
+  ],
+  "build": [
+    "cd argp-standalone-1.5.0 && meson setup build --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release",
+    "cd argp-standalone-1.5.0 && ninja -C build"
+  ],
+  "install": [
+    "cd argp-standalone-1.5.0 && DESTDIR=\"$DESTDIR\" ninja -C build install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

@@ -1,22 +1,25 @@
 {
-    "name": "libmd",
-    "description": "Message digest library providing MD2, MD4, MD5, RIPEMD-160, SHA-1, SHA-2, and SHA-3 (SHAKE) functions commonly found on BSD systems, split out of libbsd to serve as a portable, standalone implementation for non-BSD systems.",
-    "version": "1.2.0",
-    "dependencies": [
-        "autoconf",
-        "automake",
-        "libtool",
-        "pkgconf"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o libmd-1.2.0.tar.xz https://libbsd.freedesktop.org/releases/libmd-1.2.0.tar.xz",
-        "tar -xf libmd-1.2.0.tar.xz"
-    ],
-    "build": [
-        "cd libmd-1.2.0 && ./configure --prefix=\"$PREFIX\"",
-        "cd libmd-1.2.0 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd libmd-1.2.0 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "libmd",
+  "description": "Message digest library providing MD2, MD4, MD5, RIPEMD-160, SHA-1, SHA-2, and SHA-3 (SHAKE) functions commonly found on BSD systems, split out of libbsd to serve as a portable, standalone implementation for non-BSD systems.",
+  "version": "1.2.0",
+  "dependencies": [
+    "autoconf",
+    "automake",
+    "libtool",
+    "pkgconf"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o libmd-1.2.0.tar.xz https://libbsd.freedesktop.org/releases/libmd-1.2.0.tar.xz",
+    "tar -xf libmd-1.2.0.tar.xz"
+  ],
+  "build": [
+    "cd libmd-1.2.0 && ./configure --prefix=\"$PREFIX\"",
+    "cd libmd-1.2.0 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd libmd-1.2.0 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

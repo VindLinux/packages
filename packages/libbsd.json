@@ -1,23 +1,26 @@
 {
-    "name": "libbsd",
-    "description": "Library providing useful functions commonly found on BSD systems (queue.h, err.h, arc4random, setproctitle, strlcpy/strlcat, fgetln, and more), easing the portability of software with strong BSD origins to Linux and other non-BSD systems.",
-    "version": "0.12.2",
-    "dependencies": [
-        "autoconf",
-        "automake",
-        "libtool",
-        "pkgconf",
-        "libmd"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o libbsd-0.12.2.tar.xz https://libbsd.freedesktop.org/releases/libbsd-0.12.2.tar.xz",
-        "tar -xf libbsd-0.12.2.tar.xz"
-    ],
-    "build": [
-        "cd libbsd-0.12.2 && ./configure --prefix=\"$PREFIX\"",
-        "cd libbsd-0.12.2 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd libbsd-0.12.2 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "libbsd",
+  "description": "Library providing useful functions commonly found on BSD systems (queue.h, err.h, arc4random, setproctitle, strlcpy/strlcat, fgetln, and more), easing the portability of software with strong BSD origins to Linux and other non-BSD systems.",
+  "version": "0.12.2",
+  "dependencies": [
+    "autoconf",
+    "automake",
+    "libtool",
+    "pkgconf",
+    "libmd"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o libbsd-0.12.2.tar.xz https://libbsd.freedesktop.org/releases/libbsd-0.12.2.tar.xz",
+    "tar -xf libbsd-0.12.2.tar.xz"
+  ],
+  "build": [
+    "cd libbsd-0.12.2 && ./configure --prefix=\"$PREFIX\"",
+    "cd libbsd-0.12.2 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd libbsd-0.12.2 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

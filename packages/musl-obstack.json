@@ -1,18 +1,21 @@
 {
-    "name": "musl-obstack",
-    "description": "Standalone library for obstack functions on musl libc",
-    "version": "1.2.3",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o musl-obstack-1.2.3.tar.gz https://github.com/void-linux/musl-obstack/archive/refs/tags/v1.2.3.tar.gz",
-        "tar -xf musl-obstack-1.2.3.tar.gz"
-    ],
-    "build": [
-        "cd musl-obstack-1.2.3 && ./bootstrap.sh || autoreconf -fi",
-        "cd musl-obstack-1.2.3 && ./configure --prefix=\"$PREFIX\"",
-        "cd musl-obstack-1.2.3 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd musl-obstack-1.2.3 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "musl-obstack",
+  "description": "Standalone library for obstack functions on musl libc",
+  "version": "1.2.3",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o musl-obstack-1.2.3.tar.gz https://github.com/void-linux/musl-obstack/archive/refs/tags/v1.2.3.tar.gz",
+    "tar -xf musl-obstack-1.2.3.tar.gz"
+  ],
+  "build": [
+    "cd musl-obstack-1.2.3 && ./bootstrap.sh || autoreconf -fi",
+    "cd musl-obstack-1.2.3 && ./configure --prefix=\"$PREFIX\"",
+    "cd musl-obstack-1.2.3 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd musl-obstack-1.2.3 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

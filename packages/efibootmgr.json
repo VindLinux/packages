@@ -1,19 +1,22 @@
 {
-    "name": "efibootmgr",
-    "description": "Tools to manipulate EFI variables and the UEFI Boot Manager.",
-    "version": "18",
-    "dependencies": [
-        "efivar",
-        "popt"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o efibootmgr-18.tar.gz https://github.com/rhboot/efibootmgr/archive/18/efibootmgr-18.tar.gz",
-        "tar -xf efibootmgr-18.tar.gz"
-    ],
-    "build": [
-        "cd efibootmgr-18 && make EFIDIR=LFS EFI_LOADER=grubx64.efi"
-    ],
-    "install": [
-        "cd efibootmgr-18 && make install EFIDIR=LFS"
-    ]
+  "name": "efibootmgr",
+  "description": "Tools to manipulate EFI variables and the UEFI Boot Manager.",
+  "version": "18",
+  "dependencies": [
+    "efivar",
+    "popt"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o efibootmgr-18.tar.gz https://github.com/rhboot/efibootmgr/archive/18/efibootmgr-18.tar.gz",
+    "tar -xf efibootmgr-18.tar.gz"
+  ],
+  "build": [
+    "cd efibootmgr-18 && make EFIDIR=LFS EFI_LOADER=grubx64.efi"
+  ],
+  "install": [
+    "cd efibootmgr-18 && make install EFIDIR=LFS"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

@@ -1,17 +1,20 @@
 {
-    "name": "gawk",
-    "description": "GNU implementation of the AWK programming language, required by GRUB build scripts.",
-    "version": "5.3.2",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o gawk-5.3.2.tar.xz https://ftp.gnu.org/gnu/gawk/gawk-5.3.2.tar.xz",
-        "tar -xf gawk-5.3.2.tar.xz"
-    ],
-    "build": [
-        "cd gawk-5.3.2 && ./configure --prefix=\"$PREFIX\" --disable-static",
-        "cd gawk-5.3.2 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd gawk-5.3.2 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "gawk",
+  "description": "GNU implementation of the AWK programming language, required by GRUB build scripts.",
+  "version": "5.3.2",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o gawk-5.3.2.tar.xz https://ftp.gnu.org/gnu/gawk/gawk-5.3.2.tar.xz",
+    "tar -xf gawk-5.3.2.tar.xz"
+  ],
+  "build": [
+    "cd gawk-5.3.2 && ./configure --prefix=\"$PREFIX\" --disable-static",
+    "cd gawk-5.3.2 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd gawk-5.3.2 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

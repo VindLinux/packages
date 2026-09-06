@@ -1,24 +1,27 @@
 {
-    "name": "util-linux",
-    "description": "Essential collection of Linux system utilities including mount, umount, fdisk, blkid, losetup, lsblk, and libuuid/libblkid libraries for block device and filesystem management.",
-    "version": "2.40.2",
-    "dependencies": [
-        "meson",
-        "ninja",
-        "pkgconf",
-        "ncurses",
-        "bash",
-        "pam"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o util-linux-2.40.2.tar.gz https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-2.40.2.tar.gz",
-        "tar -xf util-linux-2.40.2.tar.gz"
-    ],
-    "build": [
-        "meson setup util-linux-2.40.2/build util-linux-2.40.2 --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release --wrap-mode=nodownload -D build-login=disabled -D build-su=disabled -D build-runuser=disabled",
-        "ninja -C util-linux-2.40.2/build $MAKEOPTS"
-    ],
-    "install": [
-        "DESTDIR=\"$DESTDIR\" ninja -C util-linux-2.40.2/build install"
-    ]
+  "name": "util-linux",
+  "description": "Essential collection of Linux system utilities including mount, umount, fdisk, blkid, losetup, lsblk, and libuuid/libblkid libraries for block device and filesystem management.",
+  "version": "2.40.2",
+  "dependencies": [
+    "meson",
+    "ninja",
+    "pkgconf",
+    "ncurses",
+    "bash",
+    "pam"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o util-linux-2.40.2.tar.gz https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-2.40.2.tar.gz",
+    "tar -xf util-linux-2.40.2.tar.gz"
+  ],
+  "build": [
+    "meson setup util-linux-2.40.2/build util-linux-2.40.2 --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release --wrap-mode=nodownload -D build-login=disabled -D build-su=disabled -D build-runuser=disabled",
+    "ninja -C util-linux-2.40.2/build $MAKEOPTS"
+  ],
+  "install": [
+    "DESTDIR=\"$DESTDIR\" ninja -C util-linux-2.40.2/build install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

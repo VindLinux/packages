@@ -1,17 +1,20 @@
 {
-	"name": "libunistring",
-	"description": "Library providing functions for manipulating Unicode strings and C strings according to the Unicode standard.",
-	"version": "1.4.2",
-	"dependencies": [],
-	"download": [
-		"curl -fL --retry 3 --retry-delay 2 -o libunistring-1.4.2.tar.xz https://ftp.gnu.org/gnu/libunistring/libunistring-1.4.2.tar.xz",
-		"tar -xf libunistring-1.4.2.tar.xz"
-	],
-	"build": [
-		"cd libunistring-1.4.2 && ./configure --prefix=\"$PREFIX\" --disable-static --docdir=\"$PREFIX/share/doc/libunistring-1.4.2\"",
-		"cd libunistring-1.4.2 && make $MAKEOPTS"
-	],
-	"install": [
-		"cd libunistring-1.4.2 && make DESTDIR=\"$DESTDIR\" install"
-	]
+  "name": "libunistring",
+  "description": "Library providing functions for manipulating Unicode strings and C strings according to the Unicode standard.",
+  "version": "1.4.2",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o libunistring-1.4.2.tar.xz https://ftp.gnu.org/gnu/libunistring/libunistring-1.4.2.tar.xz",
+    "tar -xf libunistring-1.4.2.tar.xz"
+  ],
+  "build": [
+    "cd libunistring-1.4.2 && ./configure --prefix=\"$PREFIX\" --disable-static --docdir=\"$PREFIX/share/doc/libunistring-1.4.2\"",
+    "cd libunistring-1.4.2 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd libunistring-1.4.2 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

@@ -1,20 +1,23 @@
 {
-    "name": "kbd",
-    "description": "Tools for managing the Linux console: keymaps, console fonts, virtual terminals, and keyboard modes.",
-    "version": "2.10.0",
-    "dependencies": [
-        "autoconf",
-        "readline"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o kbd-2.10.0.tar.xz https://mirrors.edge.kernel.org/pub/linux/utils/kbd/kbd-2.10.0.tar.xz",
-        "tar -xf kbd-2.10.0.tar.xz"
-    ],
-    "build": [
-        "cd kbd-2.10.0 && ./configure --prefix=\"$PREFIX\" --disable-nls --disable-vlock",
-        "cd kbd-2.10.0 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd kbd-2.10.0 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "kbd",
+  "description": "Tools for managing the Linux console: keymaps, console fonts, virtual terminals, and keyboard modes.",
+  "version": "2.10.0",
+  "dependencies": [
+    "autoconf",
+    "readline"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o kbd-2.10.0.tar.xz https://mirrors.edge.kernel.org/pub/linux/utils/kbd/kbd-2.10.0.tar.xz",
+    "tar -xf kbd-2.10.0.tar.xz"
+  ],
+  "build": [
+    "cd kbd-2.10.0 && ./configure --prefix=\"$PREFIX\" --disable-nls --disable-vlock",
+    "cd kbd-2.10.0 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd kbd-2.10.0 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

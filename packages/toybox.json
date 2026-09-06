@@ -1,28 +1,31 @@
 {
-    "name": "toybox",
-    "description": "Single binary providing many common Unix command-line utilities, used as a lightweight non-GNU alternative to coreutils and other GNU userland tools.",
-    "version": "0.8.12",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o toybox-0.8.12.tar.gz http://landley.net/toybox/downloads/toybox-0.8.12.tar.gz",
-        "rm -rf toybox-0.8.12",
-        "tar -xf toybox-0.8.12.tar.gz"
-    ],
-    "build": [
-        "cd toybox-0.8.12 && make defconfig && sed -i -e 's/^# CONFIG_AWK is not set/CONFIG_AWK=y/' -e 's/^# CONFIG_EXPR is not set/CONFIG_EXPR=y/' -e 's/^# CONFIG_TR is not set/CONFIG_TR=y/' .config && make clean && CC=x86_64-pc-linux-musl-gcc CFLAGS='--sysroot=/mnt/nullos' LDFLAGS='--sysroot=/mnt/nullos' make $MAKEOPTS"
-    ],
-    "install": [
-        "mkdir -p \"$DESTDIR$PREFIX/bin\"",
-        "cp toybox-0.8.12/toybox \"$DESTDIR$PREFIX/bin/toybox\"",
-        "chmod 755 \"$DESTDIR$PREFIX/bin/toybox\"",
-        "ln -sf toybox \"$DESTDIR$PREFIX/bin/awk\"",
-        "ln -sf toybox \"$DESTDIR$PREFIX/bin/expr\"",
-        "ln -sf toybox \"$DESTDIR$PREFIX/bin/tr\"",
-        "ln -sf toybox \"$DESTDIR$PREFIX/bin/sed\"",
-        "ln -sf toybox \"$DESTDIR$PREFIX/bin/cut\"",
-        "ln -sf toybox \"$DESTDIR$PREFIX/bin/sort\"",
-        "ln -sf toybox \"$DESTDIR$PREFIX/bin/head\"",
-        "ln -sf toybox \"$DESTDIR$PREFIX/bin/tail\"",
-        "ln -sf toybox \"$DESTDIR$PREFIX/bin/wc\""
-    ]
+  "name": "toybox",
+  "description": "Single binary providing many common Unix command-line utilities, used as a lightweight non-GNU alternative to coreutils and other GNU userland tools.",
+  "version": "0.8.12",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o toybox-0.8.12.tar.gz http://landley.net/toybox/downloads/toybox-0.8.12.tar.gz",
+    "rm -rf toybox-0.8.12",
+    "tar -xf toybox-0.8.12.tar.gz"
+  ],
+  "build": [
+    "cd toybox-0.8.12 && make defconfig && sed -i -e 's/^# CONFIG_AWK is not set/CONFIG_AWK=y/' -e 's/^# CONFIG_EXPR is not set/CONFIG_EXPR=y/' -e 's/^# CONFIG_TR is not set/CONFIG_TR=y/' .config && make clean && CC=x86_64-pc-linux-musl-gcc CFLAGS='--sysroot=/mnt/nullos' LDFLAGS='--sysroot=/mnt/nullos' make $MAKEOPTS"
+  ],
+  "install": [
+    "mkdir -p \"$DESTDIR$PREFIX/bin\"",
+    "cp toybox-0.8.12/toybox \"$DESTDIR$PREFIX/bin/toybox\"",
+    "chmod 755 \"$DESTDIR$PREFIX/bin/toybox\"",
+    "ln -sf toybox \"$DESTDIR$PREFIX/bin/awk\"",
+    "ln -sf toybox \"$DESTDIR$PREFIX/bin/expr\"",
+    "ln -sf toybox \"$DESTDIR$PREFIX/bin/tr\"",
+    "ln -sf toybox \"$DESTDIR$PREFIX/bin/sed\"",
+    "ln -sf toybox \"$DESTDIR$PREFIX/bin/cut\"",
+    "ln -sf toybox \"$DESTDIR$PREFIX/bin/sort\"",
+    "ln -sf toybox \"$DESTDIR$PREFIX/bin/head\"",
+    "ln -sf toybox \"$DESTDIR$PREFIX/bin/tail\"",
+    "ln -sf toybox \"$DESTDIR$PREFIX/bin/wc\""
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

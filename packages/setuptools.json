@@ -1,15 +1,18 @@
 {
-    "name": "setuptools",
-    "description": "Python packaging and distribution library used to build and install Python modules, required by build tools such as Meson that still depend on the legacy setup.py interface.",
-    "version": "84.0.0",
-    "dependencies": [
-        "python",
-        "openssl"
-    ],
-    "download": [],
-    "build": [],
-    "install": [
-        "python3 -m ensurepip --default-pip",
-        "PYTHONPATH= python3 -m pip install --no-cache-dir --break-system-packages --no-deps --ignore-installed --target=\"$DESTDIR$PREFIX/lib/python3.13/site-packages\" setuptools==84.0.0"
-    ]
+  "name": "setuptools",
+  "description": "Python packaging and distribution library used to build and install Python modules, required by build tools such as Meson that still depend on the legacy setup.py interface.",
+  "version": "84.0.0",
+  "dependencies": [
+    "python",
+    "openssl"
+  ],
+  "download": [],
+  "build": [],
+  "install": [
+    "python3 -m ensurepip --default-pip",
+    "PYTHONPATH= python3 -m pip install --no-cache-dir --break-system-packages --no-deps --ignore-installed --target=\"$DESTDIR$PREFIX/lib/python3.13/site-packages\" setuptools==84.0.0"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

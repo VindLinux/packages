@@ -1,21 +1,24 @@
 {
-    "name": "libc++abi",
-    "description": "LLVM's implementation of low-level support for a standard C++ ABI, built together with libunwind as a standalone component against the already-installed LLVM/Clang 21.1.8. Uses LLVM's own unwinder (libunwind) rather than GCC's libgcc_s, since GCC is not present in the final system.",
-    "version": "21.1.8",
-    "dependencies": [
-        "llvm",
-        "cmake",
-        "ninja"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o llvm-project-21.1.8.src.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/llvm-project-21.1.8.src.tar.xz",
-        "tar -xf llvm-project-21.1.8.src.tar.xz"
-    ],
-    "build": [
-        "unset CXXFLAGS CFLAGS LDFLAGS; cmake -G Ninja -S llvm-project-21.1.8.src/runtimes -B llvm-project-21.1.8.src/runtimes/build -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=\"$PREFIX\" -D LLVM_ENABLE_RUNTIMES='libunwind;libcxx;libcxxabi' -D LLVM_DIR=\"$PREFIX/lib/cmake/llvm\" -D LIBCXXABI_USE_LLVM_UNWINDER=ON -D LIBCXXABI_USE_COMPILER_RT=ON -D LIBCXX_CXX_ABI=libcxxabi -D LIBCXX_USE_COMPILER_RT=ON -D LIBCXX_HAS_MUSL_LIBC=ON -D LIBCXX_HAS_ATOMIC_LIB=OFF -D CMAKE_C_COMPILER_WORKS=ON -D CMAKE_CXX_COMPILER_WORKS=ON",
-        "unset CXXFLAGS CFLAGS LDFLAGS; ninja -C llvm-project-21.1.8.src/runtimes/build $MAKEOPTS"
-    ],
-    "install": [
-        "DESTDIR=\"$DESTDIR\" ninja -C llvm-project-21.1.8.src/runtimes/build install"
-    ]
+  "name": "libc++abi",
+  "description": "LLVM's implementation of low-level support for a standard C++ ABI, built together with libunwind as a standalone component against the already-installed LLVM/Clang 21.1.8. Uses LLVM's own unwinder (libunwind) rather than GCC's libgcc_s, since GCC is not present in the final system.",
+  "version": "21.1.8",
+  "dependencies": [
+    "llvm",
+    "cmake",
+    "ninja"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o llvm-project-21.1.8.src.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/llvm-project-21.1.8.src.tar.xz",
+    "tar -xf llvm-project-21.1.8.src.tar.xz"
+  ],
+  "build": [
+    "unset CXXFLAGS CFLAGS LDFLAGS; cmake -G Ninja -S llvm-project-21.1.8.src/runtimes -B llvm-project-21.1.8.src/runtimes/build -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=\"$PREFIX\" -D LLVM_ENABLE_RUNTIMES='libunwind;libcxx;libcxxabi' -D LLVM_DIR=\"$PREFIX/lib/cmake/llvm\" -D LIBCXXABI_USE_LLVM_UNWINDER=ON -D LIBCXXABI_USE_COMPILER_RT=ON -D LIBCXX_CXX_ABI=libcxxabi -D LIBCXX_USE_COMPILER_RT=ON -D LIBCXX_HAS_MUSL_LIBC=ON -D LIBCXX_HAS_ATOMIC_LIB=OFF -D CMAKE_C_COMPILER_WORKS=ON -D CMAKE_CXX_COMPILER_WORKS=ON",
+    "unset CXXFLAGS CFLAGS LDFLAGS; ninja -C llvm-project-21.1.8.src/runtimes/build $MAKEOPTS"
+  ],
+  "install": [
+    "DESTDIR=\"$DESTDIR\" ninja -C llvm-project-21.1.8.src/runtimes/build install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

@@ -1,17 +1,23 @@
 {
-    "name": "iputils",
-    "description": "Networking utilities for Linux, including ping, tracepath, arping, and clockdiff.",
-    "version": "20250605",
-    "dependencies": ["meson", "ninja"],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o iputils-20250605.tar.gz https://github.com/iputils/iputils/archive/refs/tags/20250605.tar.gz",
-        "tar -xf iputils-20250605.tar.gz"
-    ],
-    "build": [
-        "cd iputils-20250605 && meson setup build --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\"",
-        "cd iputils-20250605 && ninja -C build"
-    ],
-    "install": [
-        "cd iputils-20250605 && DESTDIR=\"$DESTDIR\" ninja -C build install"
-    ]
+  "name": "iputils",
+  "description": "Networking utilities for Linux, including ping, tracepath, arping, and clockdiff.",
+  "version": "20250605",
+  "dependencies": [
+    "meson",
+    "ninja"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o iputils-20250605.tar.gz https://github.com/iputils/iputils/archive/refs/tags/20250605.tar.gz",
+    "tar -xf iputils-20250605.tar.gz"
+  ],
+  "build": [
+    "cd iputils-20250605 && meson setup build --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\"",
+    "cd iputils-20250605 && ninja -C build"
+  ],
+  "install": [
+    "cd iputils-20250605 && DESTDIR=\"$DESTDIR\" ninja -C build install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

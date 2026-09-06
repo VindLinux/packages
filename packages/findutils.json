@@ -1,17 +1,20 @@
 {
-    "name": "findutils",
-    "description": "GNU utilities to search the filesystem, providing find, xargs, and locate.",
-    "version": "4.11.0",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o findutils-4.11.0.tar.xz https://ftp.gnu.org/gnu/findutils/findutils-4.11.0.tar.xz",
-        "tar -xf findutils-4.11.0.tar.xz"
-    ],
-    "build": [
-        "cd findutils-4.11.0 && ./configure --prefix=\"$PREFIX\"",
-        "cd findutils-4.11.0 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd findutils-4.11.0 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "findutils",
+  "description": "GNU utilities to search the filesystem, providing find, xargs, and locate.",
+  "version": "4.11.0",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o findutils-4.11.0.tar.xz https://ftp.gnu.org/gnu/findutils/findutils-4.11.0.tar.xz",
+    "tar -xf findutils-4.11.0.tar.xz"
+  ],
+  "build": [
+    "cd findutils-4.11.0 && ./configure --prefix=\"$PREFIX\"",
+    "cd findutils-4.11.0 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd findutils-4.11.0 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

@@ -1,16 +1,19 @@
 {
-	"name": "cjson",
-	"description": "Ultralightweight JSON parser in ANSI C.",
-	"version": "1.7.19",
-	"dependencies": [],
-	"download": [
-		"curl -fL --retry 3 --retry-delay 2 -o cJSON-1.7.19.tar.gz https://github.com/DaveGamble/cJSON/archive/refs/tags/v1.7.19.tar.gz",
-		"tar -xf cJSON-1.7.19.tar.gz"
-	],
-	"build": [
-		"cd cJSON-1.7.19 && make PREFIX=\"$PREFIX\" $MAKEOPTS"
-	],
-	"install": [
-		"cd cJSON-1.7.19 && make PREFIX=\"$PREFIX\" DESTDIR=\"$DESTDIR\" install"
-	]
+  "name": "cjson",
+  "description": "Ultralightweight JSON parser in ANSI C.",
+  "version": "1.7.19",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o cJSON-1.7.19.tar.gz https://github.com/DaveGamble/cJSON/archive/refs/tags/v1.7.19.tar.gz",
+    "tar -xf cJSON-1.7.19.tar.gz"
+  ],
+  "build": [
+    "cd cJSON-1.7.19 && make PREFIX=\"$PREFIX\" $MAKEOPTS"
+  ],
+  "install": [
+    "cd cJSON-1.7.19 && make PREFIX=\"$PREFIX\" DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

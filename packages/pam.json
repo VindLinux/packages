@@ -1,22 +1,25 @@
 {
-    "name": "pam",
-    "description": "Linux-PAM (Pluggable Authentication Modules), a suite of shared libraries that enable local system administrators to choose how applications authenticate users, providing modules such as pam_unix, pam_faillock, pam_limits, and the /etc/pam.d configuration framework.",
-    "version": "1.7.2",
-    "dependencies": [
-        "meson",
-        "ninja",
-        "flex",
-        "bison"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o Linux-PAM-1.7.2.tar.xz https://github.com/linux-pam/linux-pam/releases/download/v1.7.2/Linux-PAM-1.7.2.tar.xz",
-        "tar -xf Linux-PAM-1.7.2.tar.xz"
-    ],
-    "build": [
-        "cd Linux-PAM-1.7.2 && meson setup build --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release -Ddocs=disabled -Daudit=disabled -Dselinux=disabled -Dlogind=disabled -Delogind=disabled -Dopenssl=disabled -Dnis=disabled -Dpam_lastlog=disabled",
-        "cd Linux-PAM-1.7.2 && ninja -C build"
-    ],
-    "install": [
-        "cd Linux-PAM-1.7.2 && DESTDIR=\"$DESTDIR\" meson install -C build --no-rebuild"
-    ]
+  "name": "pam",
+  "description": "Linux-PAM (Pluggable Authentication Modules), a suite of shared libraries that enable local system administrators to choose how applications authenticate users, providing modules such as pam_unix, pam_faillock, pam_limits, and the /etc/pam.d configuration framework.",
+  "version": "1.7.2",
+  "dependencies": [
+    "meson",
+    "ninja",
+    "flex",
+    "bison"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o Linux-PAM-1.7.2.tar.xz https://github.com/linux-pam/linux-pam/releases/download/v1.7.2/Linux-PAM-1.7.2.tar.xz",
+    "tar -xf Linux-PAM-1.7.2.tar.xz"
+  ],
+  "build": [
+    "cd Linux-PAM-1.7.2 && meson setup build --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release -Ddocs=disabled -Daudit=disabled -Dselinux=disabled -Dlogind=disabled -Delogind=disabled -Dopenssl=disabled -Dnis=disabled -Dpam_lastlog=disabled",
+    "cd Linux-PAM-1.7.2 && ninja -C build"
+  ],
+  "install": [
+    "cd Linux-PAM-1.7.2 && DESTDIR=\"$DESTDIR\" meson install -C build --no-rebuild"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

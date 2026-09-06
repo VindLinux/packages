@@ -1,19 +1,22 @@
 {
-    "name": "psmisc",
-    "description": "Collection of small utilities that use the proc filesystem, including fuser, killall, pstree, and peekfd, complementing procps-ng.",
-    "version": "23.7",
-    "dependencies": [
-        "ncurses"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o psmisc-23.7.tar.xz https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.7.tar.xz",
-        "tar -xf psmisc-23.7.tar.xz"
-    ],
-    "build": [
-        "cd psmisc-23.7 && ./configure --prefix=\"$PREFIX\"",
-        "cd psmisc-23.7 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd psmisc-23.7 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "psmisc",
+  "description": "Collection of small utilities that use the proc filesystem, including fuser, killall, pstree, and peekfd, complementing procps-ng.",
+  "version": "23.7",
+  "dependencies": [
+    "ncurses"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o psmisc-23.7.tar.xz https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.7.tar.xz",
+    "tar -xf psmisc-23.7.tar.xz"
+  ],
+  "build": [
+    "cd psmisc-23.7 && ./configure --prefix=\"$PREFIX\"",
+    "cd psmisc-23.7 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd psmisc-23.7 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

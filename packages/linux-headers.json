@@ -1,14 +1,17 @@
 {
-	"name": "linux-headers",
-	"description": "Linux kernel userspace API headers required for compiling applications against the Linux kernel.",
-	"version": "6.18.35",
-	"dependencies": [],
-	"download": [
-		"curl -fL --retry 3 --retry-delay 2 -o linux-6.18.35.tar.xz https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.35.tar.xz",
-		"tar -xf linux-6.18.35.tar.xz"
-	],
-	"build": [],
-	"install": [
-		"cd linux-6.18.35 && make INSTALL_HDR_PATH=\"$DESTDIR$PREFIX\" headers_install"
-	]
+  "name": "linux-headers",
+  "description": "Linux kernel userspace API headers required for compiling applications against the Linux kernel.",
+  "version": "6.18.35",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o linux-6.18.35.tar.xz https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.35.tar.xz",
+    "tar -xf linux-6.18.35.tar.xz"
+  ],
+  "build": [],
+  "install": [
+    "cd linux-6.18.35 && make INSTALL_HDR_PATH=\"$DESTDIR$PREFIX\" headers_install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

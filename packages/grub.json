@@ -1,23 +1,26 @@
 {
-    "name": "grub",
-    "description": "GNU GRUB bootloader built for x86_64 UEFI systems with musl compatibility.",
-    "version": "2.14",
-    "dependencies": [
-        "efibootmgr",
-        "bison",
-        "flex",
-        "python"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o grub-2.14.tar.xz https://ftp.gnu.org/gnu/grub/grub-2.14.tar.xz",
-        "tar -xf grub-2.14.tar.xz"
-    ],
-    "build": [
-        "cd grub-2.14 && env -u CFLAGS -u CPPFLAGS -u CXXFLAGS -u LDFLAGS ./configure --prefix=\"$PREFIX\" --sysconfdir=/etc --disable-efiemu --with-platform=efi --target=x86_64 --disable-werror",
-        "cd grub-2.14 && sed -i 's/^#if 1$/#if 0/' grub-core/lib/gnulib/getopt-cdefs.h",
-        "cd grub-2.14 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd grub-2.14 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "grub",
+  "description": "GNU GRUB bootloader built for x86_64 UEFI systems with musl compatibility.",
+  "version": "2.14",
+  "dependencies": [
+    "efibootmgr",
+    "bison",
+    "flex",
+    "python"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o grub-2.14.tar.xz https://ftp.gnu.org/gnu/grub/grub-2.14.tar.xz",
+    "tar -xf grub-2.14.tar.xz"
+  ],
+  "build": [
+    "cd grub-2.14 && env -u CFLAGS -u CPPFLAGS -u CXXFLAGS -u LDFLAGS ./configure --prefix=\"$PREFIX\" --sysconfdir=/etc --disable-efiemu --with-platform=efi --target=x86_64 --disable-werror",
+    "cd grub-2.14 && sed -i 's/^#if 1$/#if 0/' grub-core/lib/gnulib/getopt-cdefs.h",
+    "cd grub-2.14 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd grub-2.14 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

@@ -1,17 +1,20 @@
 {
-    "name": "popt",
-    "description": "Library for parsing command-line options.",
-    "version": "1.19",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o popt-1.19.tar.gz https://ftp.osuosl.org/pub/rpm/popt/releases/popt-1.x/popt-1.19.tar.gz",
-        "tar -xf popt-1.19.tar.gz"
-    ],
-    "build": [
-        "cd popt-1.19 && ./configure --prefix=\"$PREFIX\" --disable-static",
-        "cd popt-1.19 && make"
-    ],
-    "install": [
-        "cd popt-1.19 && make install DESTDIR=\"$DESTDIR\""
-    ]
+  "name": "popt",
+  "description": "Library for parsing command-line options.",
+  "version": "1.19",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o popt-1.19.tar.gz https://ftp.osuosl.org/pub/rpm/popt/releases/popt-1.x/popt-1.19.tar.gz",
+    "tar -xf popt-1.19.tar.gz"
+  ],
+  "build": [
+    "cd popt-1.19 && ./configure --prefix=\"$PREFIX\" --disable-static",
+    "cd popt-1.19 && make"
+  ],
+  "install": [
+    "cd popt-1.19 && make install DESTDIR=\"$DESTDIR\""
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

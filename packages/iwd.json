@@ -1,20 +1,23 @@
 {
-    "name": "iwd",
-    "description": "iNet Wireless Daemon (iwd) is a minimalistic wireless daemon for Linux that uses modern kernel interfaces like cfg80211 and nl80211 (netlink). It provides a D-Bus API and the iwctl command-line client, and does not depend on wpa_supplicant.",
-    "version": "3.12",
-    "dependencies": [
-        "dbus",
-        "readline"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o iwd-3.12.tar.xz https://www.kernel.org/pub/linux/network/wireless/iwd-3.12.tar.xz",
-        "tar -xf iwd-3.12.tar.xz"
-    ],
-    "build": [
-        "cd iwd-3.12 && ./configure --prefix=\"$PREFIX\" --sysconfdir=/etc --localstatedir=/var --enable-client --disable-manual-pages --disable-systemd-service --with-dbus-datadir=\"$PREFIX/share/dbus-1\"",
-        "cd iwd-3.12 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd iwd-3.12 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "iwd",
+  "description": "iNet Wireless Daemon (iwd) is a minimalistic wireless daemon for Linux that uses modern kernel interfaces like cfg80211 and nl80211 (netlink). It provides a D-Bus API and the iwctl command-line client, and does not depend on wpa_supplicant.",
+  "version": "3.12",
+  "dependencies": [
+    "dbus",
+    "readline"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o iwd-3.12.tar.xz https://www.kernel.org/pub/linux/network/wireless/iwd-3.12.tar.xz",
+    "tar -xf iwd-3.12.tar.xz"
+  ],
+  "build": [
+    "cd iwd-3.12 && ./configure --prefix=\"$PREFIX\" --sysconfdir=/etc --localstatedir=/var --enable-client --disable-manual-pages --disable-systemd-service --with-dbus-datadir=\"$PREFIX/share/dbus-1\"",
+    "cd iwd-3.12 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd iwd-3.12 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

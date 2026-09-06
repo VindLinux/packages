@@ -1,17 +1,20 @@
 {
-	"name": "pcre2",
-	"description": "Perl-compatible regular expression library supporting 8-bit, 16-bit, and 32-bit character encodings, with optional Unicode and JIT support.",
-	"version": "10.47",
-	"dependencies": [],
-	"download": [
-		"curl -fL --retry 3 --retry-delay 2 -o pcre2-10.47.tar.gz https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.47/pcre2-10.47.tar.gz",
-		"tar -xf pcre2-10.47.tar.gz"
-	],
-	"build": [
-		"cd pcre2-10.47 && ./configure --prefix=\"$PREFIX\" --disable-static --enable-jit",
-		"cd pcre2-10.47 && make $MAKEOPTS"
-	],
-	"install": [
-		"cd pcre2-10.47 && make DESTDIR=\"$DESTDIR\" install"
-	]
+  "name": "pcre2",
+  "description": "Perl-compatible regular expression library supporting 8-bit, 16-bit, and 32-bit character encodings, with optional Unicode and JIT support.",
+  "version": "10.47",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o pcre2-10.47.tar.gz https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.47/pcre2-10.47.tar.gz",
+    "tar -xf pcre2-10.47.tar.gz"
+  ],
+  "build": [
+    "cd pcre2-10.47 && ./configure --prefix=\"$PREFIX\" --disable-static --enable-jit",
+    "cd pcre2-10.47 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd pcre2-10.47 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

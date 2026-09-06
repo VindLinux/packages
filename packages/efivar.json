@@ -1,20 +1,23 @@
 {
-    "name": "efivar",
-    "description": "Tools and libraries for manipulating UEFI variables and EFI signature lists.",
-    "version": "39",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o efivar-39.tar.gz https://github.com/rhboot/efivar/archive/39/efivar-39.tar.gz",
-        "curl -fL --retry 3 --retry-delay 2 -o efivar-39-upstream_fixes-1.patch https://www.linuxfromscratch.org/patches/blfs/13.0/efivar-39-upstream_fixes-1.patch",
-        "tar -xf efivar-39.tar.gz"
-    ],
-    "build": [
-        "cd efivar-39 && patch -Np1 -i ../efivar-39-upstream_fixes-1.patch",
-        "cd efivar-39 && make ENABLE_DOCS=0"
-    ],
-    "install": [
-        "cd efivar-39 && make install ENABLE_DOCS=0 LIBDIR=\"$PREFIX/lib\" DESTDIR=\"$DESTDIR\"",
-        "cd efivar-39 && install -Dm644 docs/efivar.1 \"$DESTDIR$PREFIX/share/man/man1/efivar.1\"",
-        "cd efivar-39 && mkdir -p \"$DESTDIR$PREFIX/share/man/man3\" && install -m644 docs/*.3 \"$DESTDIR$PREFIX/share/man/man3/\""
-    ]
+  "name": "efivar",
+  "description": "Tools and libraries for manipulating UEFI variables and EFI signature lists.",
+  "version": "39",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o efivar-39.tar.gz https://github.com/rhboot/efivar/archive/39/efivar-39.tar.gz",
+    "curl -fL --retry 3 --retry-delay 2 -o efivar-39-upstream_fixes-1.patch https://www.linuxfromscratch.org/patches/blfs/13.0/efivar-39-upstream_fixes-1.patch",
+    "tar -xf efivar-39.tar.gz"
+  ],
+  "build": [
+    "cd efivar-39 && patch -Np1 -i ../efivar-39-upstream_fixes-1.patch",
+    "cd efivar-39 && make ENABLE_DOCS=0"
+  ],
+  "install": [
+    "cd efivar-39 && make install ENABLE_DOCS=0 LIBDIR=\"$PREFIX/lib\" DESTDIR=\"$DESTDIR\"",
+    "cd efivar-39 && install -Dm644 docs/efivar.1 \"$DESTDIR$PREFIX/share/man/man1/efivar.1\"",
+    "cd efivar-39 && mkdir -p \"$DESTDIR$PREFIX/share/man/man3\" && install -m644 docs/*.3 \"$DESTDIR$PREFIX/share/man/man3/\""
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

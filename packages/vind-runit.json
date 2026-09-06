@@ -1,22 +1,25 @@
 {
-    "name": "vind-runit",
-    "description": "Stage scripts, service utilities and system commands (poweroff, reboot) for runit, used by Vind.",
-    "version": "1.0.0",
-    "dependencies": [
-        "runit"
-    ],
-    "download": [
-        "git clone https://github.com/VindLinux/vind-runit vind-runit"
-    ],
-    "build": [],
-    "install": [
-        "cd vind-runit && install -D -m 0755 runit/1 \"$DESTDIR/etc/runit/1\"",
-        "cd vind-runit && install -D -m 0755 runit/2 \"$DESTDIR/etc/runit/2\"",
-        "cd vind-runit && install -D -m 0755 runit/3 \"$DESTDIR/etc/runit/3\"",
-        "mkdir -p \"$DESTDIR/etc/runit/utils\"",
-        "cd vind-runit && for f in utils/*; do install -D -m 0755 \"$f\" \"$DESTDIR/etc/runit/utils/$(basename \"$f\")\"; done",
-        "mkdir -p \"$DESTDIR/etc/service\"",
-        "cd vind-runit && for service in service/*; do name=\"$(basename \"$service\")\"; mkdir -p \"$DESTDIR/etc/service/$name\"; install -D -m 0755 \"$service/run\" \"$DESTDIR/etc/service/$name/run\"; done",
-        "cd vind-runit && for f in commands/*; do install -D -m 0755 \"$f\" \"$DESTDIR$PREFIX/sbin/$(basename \"$f\")\"; done"
-    ]
+  "name": "vind-runit",
+  "description": "Stage scripts, service utilities and system commands (poweroff, reboot) for runit, used by Vind.",
+  "version": "1.0.0",
+  "dependencies": [
+    "runit"
+  ],
+  "download": [
+    "git clone https://github.com/VindLinux/vind-runit vind-runit"
+  ],
+  "build": [],
+  "install": [
+    "cd vind-runit && install -D -m 0755 runit/1 \"$DESTDIR/etc/runit/1\"",
+    "cd vind-runit && install -D -m 0755 runit/2 \"$DESTDIR/etc/runit/2\"",
+    "cd vind-runit && install -D -m 0755 runit/3 \"$DESTDIR/etc/runit/3\"",
+    "mkdir -p \"$DESTDIR/etc/runit/utils\"",
+    "cd vind-runit && for f in utils/*; do install -D -m 0755 \"$f\" \"$DESTDIR/etc/runit/utils/$(basename \"$f\")\"; done",
+    "mkdir -p \"$DESTDIR/etc/service\"",
+    "cd vind-runit && for service in service/*; do name=\"$(basename \"$service\")\"; mkdir -p \"$DESTDIR/etc/service/$name\"; install -D -m 0755 \"$service/run\" \"$DESTDIR/etc/service/$name/run\"; done",
+    "cd vind-runit && for f in commands/*; do install -D -m 0755 \"$f\" \"$DESTDIR$PREFIX/sbin/$(basename \"$f\")\"; done"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

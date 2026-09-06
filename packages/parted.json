@@ -1,17 +1,22 @@
 {
-    "name": "parted",
-    "description": "GNU partition editor for creating, resizing, and managing disk partitions and partition tables.",
-    "version": "3.7",
-    "dependencies": ["util-linux"],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o parted-3.7.tar.xz https://ftp.gnu.org/gnu/parted/parted-3.7.tar.xz",
-        "tar -xf parted-3.7.tar.xz"
-    ],
-    "build": [
-        "cd parted-3.7 && ./configure --prefix=\"$PREFIX\" --disable-nls --disable-device-mapper --without-readline",
-        "cd parted-3.7 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd parted-3.7 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "parted",
+  "description": "GNU partition editor for creating, resizing, and managing disk partitions and partition tables.",
+  "version": "3.7",
+  "dependencies": [
+    "util-linux"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o parted-3.7.tar.xz https://ftp.gnu.org/gnu/parted/parted-3.7.tar.xz",
+    "tar -xf parted-3.7.tar.xz"
+  ],
+  "build": [
+    "cd parted-3.7 && ./configure --prefix=\"$PREFIX\" --disable-nls --disable-device-mapper --without-readline",
+    "cd parted-3.7 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd parted-3.7 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

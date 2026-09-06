@@ -1,17 +1,22 @@
 {
-    "name": "nano",
-    "description": "Small, user-friendly command-line text editor, the default editor on many Linux systems.",
-    "version": "9.2",
-    "dependencies": ["ncurses"],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o nano-9.2.tar.xz https://www.nano-editor.org/dist/v9/nano-9.2.tar.xz",
-        "tar -xf nano-9.2.tar.xz"
-    ],
-    "build": [
-        "cd nano-9.2 && ./configure --prefix=\"$PREFIX\" --sysconfdir=/etc --enable-utf8",
-        "cd nano-9.2 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd nano-9.2 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "nano",
+  "description": "Small, user-friendly command-line text editor, the default editor on many Linux systems.",
+  "version": "9.2",
+  "dependencies": [
+    "ncurses"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o nano-9.2.tar.xz https://www.nano-editor.org/dist/v9/nano-9.2.tar.xz",
+    "tar -xf nano-9.2.tar.xz"
+  ],
+  "build": [
+    "cd nano-9.2 && ./configure --prefix=\"$PREFIX\" --sysconfdir=/etc --enable-utf8",
+    "cd nano-9.2 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd nano-9.2 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

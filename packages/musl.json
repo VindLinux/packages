@@ -1,20 +1,23 @@
 {
-    "name": "musl",
-    "description": "Lightweight, fast, and standards-conformant C standard library implementation, designed as a musl-libc alternative to glibc for static and dynamic linking.",
-    "version": "1.2.5",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o musl-1.2.5.tar.gz https://musl.libc.org/releases/musl-1.2.5.tar.gz",
-        "tar -xf musl-1.2.5.tar.gz"
-    ],
-    "build": [
-        "cd musl-1.2.5 && ./configure --prefix=\"$PREFIX\" --syslibdir=\"$PREFIX/lib\"",
-        "cd musl-1.2.5 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd musl-1.2.5 && make DESTDIR=\"$DESTDIR\" install",
-        "mkdir -p \"$DESTDIR$PREFIX/sbin\"",
-        "printf '#!/bin/sh\\nexit 0\\n' > \"$DESTDIR$PREFIX/sbin/ldconfig\"",
-        "chmod 0755 \"$DESTDIR$PREFIX/sbin/ldconfig\""
-    ]
+  "name": "musl",
+  "description": "Lightweight, fast, and standards-conformant C standard library implementation, designed as a musl-libc alternative to glibc for static and dynamic linking.",
+  "version": "1.2.5",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o musl-1.2.5.tar.gz https://musl.libc.org/releases/musl-1.2.5.tar.gz",
+    "tar -xf musl-1.2.5.tar.gz"
+  ],
+  "build": [
+    "cd musl-1.2.5 && ./configure --prefix=\"$PREFIX\" --syslibdir=\"$PREFIX/lib\"",
+    "cd musl-1.2.5 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd musl-1.2.5 && make DESTDIR=\"$DESTDIR\" install",
+    "mkdir -p \"$DESTDIR$PREFIX/sbin\"",
+    "printf '#!/bin/sh\\nexit 0\\n' > \"$DESTDIR$PREFIX/sbin/ldconfig\"",
+    "chmod 0755 \"$DESTDIR$PREFIX/sbin/ldconfig\""
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

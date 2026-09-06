@@ -1,16 +1,19 @@
 {
-    "name": "openresolv",
-    "description": "Framework for managing resolv.conf, allowing multiple sources such as DHCP clients and VPN software to update DNS resolver configuration safely.",
-    "version": "3.13.4",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o openresolv-3.13.4.tar.xz https://roy.marples.name/downloads/openresolv/openresolv-3.13.4.tar.xz",
-        "tar -xf openresolv-3.13.4.tar.xz"
-    ],
-    "build": [
-        "cd openresolv-3.13.4 && ./configure --prefix=\"$PREFIX\""
-    ],
-    "install": [
-        "cd openresolv-3.13.4 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "openresolv",
+  "description": "Framework for managing resolv.conf, allowing multiple sources such as DHCP clients and VPN software to update DNS resolver configuration safely.",
+  "version": "3.13.4",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o openresolv-3.13.4.tar.xz https://roy.marples.name/downloads/openresolv/openresolv-3.13.4.tar.xz",
+    "tar -xf openresolv-3.13.4.tar.xz"
+  ],
+  "build": [
+    "cd openresolv-3.13.4 && ./configure --prefix=\"$PREFIX\""
+  ],
+  "install": [
+    "cd openresolv-3.13.4 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

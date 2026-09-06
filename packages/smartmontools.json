@@ -1,17 +1,20 @@
 {
-    "name": "smartmontools",
-    "description": "Utilities (smartctl, smartd) for monitoring and controlling the Self-Monitoring, Analysis, and Reporting Technology (S.M.A.R.T.) system built into most modern ATA/SCSI/NVMe hard drives and SSDs.",
-    "version": "7.4",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o smartmontools-7.4.tar.gz https://downloads.sourceforge.net/project/smartmontools/smartmontools/7.4/smartmontools-7.4.tar.gz",
-        "tar -xf smartmontools-7.4.tar.gz"
-    ],
-    "build": [
-        "cd smartmontools-7.4 && ./configure --prefix=\"$PREFIX\"",
-        "cd smartmontools-7.4 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd smartmontools-7.4 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "smartmontools",
+  "description": "Utilities (smartctl, smartd) for monitoring and controlling the Self-Monitoring, Analysis, and Reporting Technology (S.M.A.R.T.) system built into most modern ATA/SCSI/NVMe hard drives and SSDs.",
+  "version": "7.4",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o smartmontools-7.4.tar.gz https://downloads.sourceforge.net/project/smartmontools/smartmontools/7.4/smartmontools-7.4.tar.gz",
+    "tar -xf smartmontools-7.4.tar.gz"
+  ],
+  "build": [
+    "cd smartmontools-7.4 && ./configure --prefix=\"$PREFIX\"",
+    "cd smartmontools-7.4 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd smartmontools-7.4 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

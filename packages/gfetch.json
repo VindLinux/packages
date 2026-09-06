@@ -1,15 +1,18 @@
 {
-    "name": "gfetch",
-    "description": "A minimalist system information fetch tool written in C.",
-    "version": "0.1.0",
-    "dependencies": [],
-    "download": [
-        "git clone --depth 1 --branch v0.1.0 https://github.com/Elgumi01/gfetch"
-    ],
-    "build": [
-        "cd gfetch && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd gfetch && make DESTDIR=\"$DESTDIR\" PREFIX=\"$PREFIX\" install"
-    ]
+  "name": "gfetch",
+  "description": "A minimalist system information fetch tool written in C.",
+  "version": "0.1.0",
+  "dependencies": [],
+  "download": [
+    "git clone --depth 1 --branch v0.1.0 https://github.com/Elgumi01/gfetch"
+  ],
+  "build": [
+    "cd gfetch && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd gfetch && make DESTDIR=\"$DESTDIR\" PREFIX=\"$PREFIX\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

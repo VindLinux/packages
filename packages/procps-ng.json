@@ -1,21 +1,24 @@
 {
-    "name": "procps-ng",
-    "description": "Collection of utilities (ps, top, free, kill, watch, vmstat) for monitoring and reporting on Linux system and process information from /proc.",
-    "version": "4.0.4",
-    "dependencies": [
-        "meson",
-        "ninja",
-        "ncurses"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o procps-ng-4.0.4.tar.xz https://gitlab.com/procps-ng/procps/-/archive/v4.0.4/procps-v4.0.4.tar.gz",
-        "tar -xf procps-ng-4.0.4.tar.xz"
-    ],
-    "build": [
-        "meson setup procps-v4.0.4/build procps-v4.0.4 --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release --wrap-mode=nodownload",
-        "ninja -C procps-v4.0.4/build $MAKEOPTS"
-    ],
-    "install": [
-        "DESTDIR=\"$DESTDIR\" ninja -C procps-v4.0.4/build install"
-    ]
+  "name": "procps-ng",
+  "description": "Collection of utilities (ps, top, free, kill, watch, vmstat) for monitoring and reporting on Linux system and process information from /proc.",
+  "version": "4.0.4",
+  "dependencies": [
+    "meson",
+    "ninja",
+    "ncurses"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o procps-ng-4.0.4.tar.xz https://gitlab.com/procps-ng/procps/-/archive/v4.0.4/procps-v4.0.4.tar.gz",
+    "tar -xf procps-ng-4.0.4.tar.xz"
+  ],
+  "build": [
+    "meson setup procps-v4.0.4/build procps-v4.0.4 --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release --wrap-mode=nodownload",
+    "ninja -C procps-v4.0.4/build $MAKEOPTS"
+  ],
+  "install": [
+    "DESTDIR=\"$DESTDIR\" ninja -C procps-v4.0.4/build install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

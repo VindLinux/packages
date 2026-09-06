@@ -1,19 +1,22 @@
 {
-    "name": "iproute2",
-    "description": "Collection of utilities for controlling TCP/IP networking and traffic control in Linux.",
-    "version": "6.10.0",
-    "dependencies": [
-        "libelf"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o iproute2-6.10.0.tar.gz https://mirrors.edge.kernel.org/pub/linux/utils/net/iproute2/iproute2-6.10.0.tar.gz",
-        "tar -xf iproute2-6.10.0.tar.gz"
-    ],
-    "build": [
-        "cd iproute2-6.10.0 && ./configure --prefix=\"$PREFIX\"",
-        "cd iproute2-6.10.0 && make $MAKEOPTS CCOPTS=\"-D_GNU_SOURCE -include endian.h\""
-    ],
-    "install": [
-        "cd iproute2-6.10.0 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "iproute2",
+  "description": "Collection of utilities for controlling TCP/IP networking and traffic control in Linux.",
+  "version": "6.10.0",
+  "dependencies": [
+    "libelf"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o iproute2-6.10.0.tar.gz https://mirrors.edge.kernel.org/pub/linux/utils/net/iproute2/iproute2-6.10.0.tar.gz",
+    "tar -xf iproute2-6.10.0.tar.gz"
+  ],
+  "build": [
+    "cd iproute2-6.10.0 && ./configure --prefix=\"$PREFIX\"",
+    "cd iproute2-6.10.0 && make $MAKEOPTS CCOPTS=\"-D_GNU_SOURCE -include endian.h\""
+  ],
+  "install": [
+    "cd iproute2-6.10.0 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

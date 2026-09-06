@@ -1,17 +1,22 @@
 {
-    "name": "less",
-    "description": "Terminal pager for viewing text files and command output, with search and scrolling support.",
-    "version": "704",
-    "dependencies": ["ncurses"],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o less-704.tar.gz https://www.greenwoodsoftware.com/less/less-704.tar.gz",
-        "tar -xf less-704.tar.gz"
-    ],
-    "build": [
-        "cd less-704 && ./configure --prefix=\"$PREFIX\"",
-        "cd less-704 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd less-704 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "less",
+  "description": "Terminal pager for viewing text files and command output, with search and scrolling support.",
+  "version": "704",
+  "dependencies": [
+    "ncurses"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o less-704.tar.gz https://www.greenwoodsoftware.com/less/less-704.tar.gz",
+    "tar -xf less-704.tar.gz"
+  ],
+  "build": [
+    "cd less-704 && ./configure --prefix=\"$PREFIX\"",
+    "cd less-704 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd less-704 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

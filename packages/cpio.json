@@ -1,17 +1,20 @@
 {
-    "name": "cpio",
-    "description": "Utility for copying files to and from cpio or tar archives, commonly used for creating initramfs images.",
-    "version": "2.15",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o cpio-2.15.tar.gz https://ftp.gnu.org/gnu/cpio/cpio-2.15.tar.gz",
-        "tar -xf cpio-2.15.tar.gz"
-    ],
-    "build": [
-        "cd cpio-2.15 && ./configure --prefix=\"$PREFIX\" CFLAGS=\"-std=gnu17 -O2\"",
-        "cd cpio-2.15 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd cpio-2.15 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "cpio",
+  "description": "Utility for copying files to and from cpio or tar archives, commonly used for creating initramfs images.",
+  "version": "2.15",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o cpio-2.15.tar.gz https://ftp.gnu.org/gnu/cpio/cpio-2.15.tar.gz",
+    "tar -xf cpio-2.15.tar.gz"
+  ],
+  "build": [
+    "cd cpio-2.15 && ./configure --prefix=\"$PREFIX\" CFLAGS=\"-std=gnu17 -O2\"",
+    "cd cpio-2.15 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd cpio-2.15 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

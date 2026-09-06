@@ -1,23 +1,26 @@
 {
-    "name": "ncurses",
-    "description": "Library for creating text-based user interfaces (TUIs), providing terminal-independent screen handling and keyboard input.",
-    "version": "6.6",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o ncurses-6.6.tar.gz https://ftp.gnu.org/gnu/ncurses/ncurses-6.6.tar.gz",
-        "tar -xf ncurses-6.6.tar.gz"
-    ],
-    "build": [
-        "cd ncurses-6.6 && ./configure --prefix=\"$PREFIX\" --with-shared --without-debug --enable-widec --enable-pc-files",
-        "cd ncurses-6.6 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd ncurses-6.6 && make DESTDIR=\"$DESTDIR\" install",
-        "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lncursesw)\\n' > libncurses.so",
-        "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lformw)\\n' > libform.so",
-        "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lmenuw)\\n' > libmenu.so",
-        "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lpanelw)\\n' > libpanel.so",
-        "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lncursesw)\\n' > libcurses.so",
-        "cd \"$DESTDIR$PREFIX/lib/pkgconfig\" && ln -sf ncursesw.pc ncurses.pc"
-    ]
+  "name": "ncurses",
+  "description": "Library for creating text-based user interfaces (TUIs), providing terminal-independent screen handling and keyboard input.",
+  "version": "6.6",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o ncurses-6.6.tar.gz https://ftp.gnu.org/gnu/ncurses/ncurses-6.6.tar.gz",
+    "tar -xf ncurses-6.6.tar.gz"
+  ],
+  "build": [
+    "cd ncurses-6.6 && ./configure --prefix=\"$PREFIX\" --with-shared --without-debug --enable-widec --enable-pc-files",
+    "cd ncurses-6.6 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd ncurses-6.6 && make DESTDIR=\"$DESTDIR\" install",
+    "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lncursesw)\\n' > libncurses.so",
+    "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lformw)\\n' > libform.so",
+    "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lmenuw)\\n' > libmenu.so",
+    "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lpanelw)\\n' > libpanel.so",
+    "cd \"$DESTDIR$PREFIX/lib\" && printf 'INPUT(-lncursesw)\\n' > libcurses.so",
+    "cd \"$DESTDIR$PREFIX/lib/pkgconfig\" && ln -sf ncursesw.pc ncurses.pc"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

@@ -1,17 +1,20 @@
 {
-    "name": "m4",
-    "description": "GNU M4 macro processor, copying input to output while expanding macros; used as a core dependency of the GNU Autotools build system (Autoconf, Automake, Libtool).",
-    "version": "1.4.21",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o m4-1.4.21.tar.xz https://ftp.gnu.org/gnu/m4/m4-1.4.21.tar.xz || curl -fL --retry 3 --retry-delay 2 -o m4-1.4.21.tar.xz https://mirrors.kernel.org/gnu/m4/m4-1.4.21.tar.xz",
-        "tar -xf m4-1.4.21.tar.xz"
-    ],
-    "build": [
-        "cd m4-1.4.21 && ./configure --prefix=\"$PREFIX\"",
-        "cd m4-1.4.21 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd m4-1.4.21 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "m4",
+  "description": "GNU M4 macro processor, copying input to output while expanding macros; used as a core dependency of the GNU Autotools build system (Autoconf, Automake, Libtool).",
+  "version": "1.4.21",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o m4-1.4.21.tar.xz https://ftp.gnu.org/gnu/m4/m4-1.4.21.tar.xz || curl -fL --retry 3 --retry-delay 2 -o m4-1.4.21.tar.xz https://mirrors.kernel.org/gnu/m4/m4-1.4.21.tar.xz",
+    "tar -xf m4-1.4.21.tar.xz"
+  ],
+  "build": [
+    "cd m4-1.4.21 && ./configure --prefix=\"$PREFIX\"",
+    "cd m4-1.4.21 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd m4-1.4.21 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

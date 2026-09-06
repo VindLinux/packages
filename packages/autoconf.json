@@ -1,19 +1,22 @@
 {
-    "name": "autoconf",
-    "description": "GNU Autoconf, a tool for producing shell scripts that automatically configure software source packages; part of the GNU Autotools build system used by autogen.sh-based projects such as libuv.",
-    "version": "2.73",
-    "dependencies": [
-        "m4"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o autoconf-2.73.tar.xz https://ftp.gnu.org/gnu/autoconf/autoconf-2.73.tar.xz",
-        "tar -xf autoconf-2.73.tar.xz"
-    ],
-    "build": [
-        "cd autoconf-2.73 && ./configure --prefix=\"$PREFIX\"",
-        "cd autoconf-2.73 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd autoconf-2.73 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "autoconf",
+  "description": "GNU Autoconf, a tool for producing shell scripts that automatically configure software source packages; part of the GNU Autotools build system used by autogen.sh-based projects such as libuv.",
+  "version": "2.73",
+  "dependencies": [
+    "m4"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o autoconf-2.73.tar.xz https://ftp.gnu.org/gnu/autoconf/autoconf-2.73.tar.xz",
+    "tar -xf autoconf-2.73.tar.xz"
+  ],
+  "build": [
+    "cd autoconf-2.73 && ./configure --prefix=\"$PREFIX\"",
+    "cd autoconf-2.73 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd autoconf-2.73 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

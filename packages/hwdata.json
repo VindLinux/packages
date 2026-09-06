@@ -1,16 +1,19 @@
 {
-    "name": "hwdata",
-    "description": "Collection of hardware identification and configuration data, including pci.ids and usb.ids databases used by tools like pciutils and usbutils.",
-    "version": "0.393",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o hwdata-0.393.tar.gz https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.393.tar.gz",
-        "tar -xf hwdata-0.393.tar.gz"
-    ],
-    "build": [
-        "cd hwdata-0.393 && ./configure --prefix=\"$PREFIX\""
-    ],
-    "install": [
-        "cd hwdata-0.393 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "hwdata",
+  "description": "Collection of hardware identification and configuration data, including pci.ids and usb.ids databases used by tools like pciutils and usbutils.",
+  "version": "0.393",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o hwdata-0.393.tar.gz https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.393.tar.gz",
+    "tar -xf hwdata-0.393.tar.gz"
+  ],
+  "build": [
+    "cd hwdata-0.393 && ./configure --prefix=\"$PREFIX\""
+  ],
+  "install": [
+    "cd hwdata-0.393 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

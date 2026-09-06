@@ -1,24 +1,27 @@
 {
-    "name": "libelf",
-    "description": "ELF object file access library, part of the Elfutils package.",
-    "version": "0.193",
-    "dependencies": [
-        "musl-fts",
-        "musl-obstack",
-        "xz",
-        "argp-standalone"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o elfutils-0.193.tar.bz2 https://sourceware.org/elfutils/ftp/0.193/elfutils-0.193.tar.bz2",
-        "tar -xf elfutils-0.193.tar.bz2"
-    ],
-    "build": [
-        "cd elfutils-0.193 && LDFLAGS=\"$LDFLAGS -lfts -lobstack\" ./configure --prefix=\"$PREFIX\" --disable-debuginfod --enable-libdebuginfod=dummy --disable-demangler",
-        "cd elfutils-0.193 && make -C lib $MAKEOPTS && make -C libelf $MAKEOPTS"
-    ],
-    "install": [
-        "cd elfutils-0.193 && make -C libelf DESTDIR=\"$DESTDIR\" install",
-        "install -Dm644 elfutils-0.193/config/libelf.pc \"$DESTDIR$PREFIX/lib/pkgconfig/libelf.pc\"",
-        "rm -f \"$DESTDIR$PREFIX/lib/libelf.a\""
-    ]
+  "name": "libelf",
+  "description": "ELF object file access library, part of the Elfutils package.",
+  "version": "0.193",
+  "dependencies": [
+    "musl-fts",
+    "musl-obstack",
+    "xz",
+    "argp-standalone"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o elfutils-0.193.tar.bz2 https://sourceware.org/elfutils/ftp/0.193/elfutils-0.193.tar.bz2",
+    "tar -xf elfutils-0.193.tar.bz2"
+  ],
+  "build": [
+    "cd elfutils-0.193 && LDFLAGS=\"$LDFLAGS -lfts -lobstack\" ./configure --prefix=\"$PREFIX\" --disable-debuginfod --enable-libdebuginfod=dummy --disable-demangler",
+    "cd elfutils-0.193 && make -C lib $MAKEOPTS && make -C libelf $MAKEOPTS"
+  ],
+  "install": [
+    "cd elfutils-0.193 && make -C libelf DESTDIR=\"$DESTDIR\" install",
+    "install -Dm644 elfutils-0.193/config/libelf.pc \"$DESTDIR$PREFIX/lib/pkgconfig/libelf.pc\"",
+    "rm -f \"$DESTDIR$PREFIX/lib/libelf.a\""
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

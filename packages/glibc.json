@@ -1,21 +1,24 @@
 {
-    "name": "glibc",
-    "description": "GNU C Library, used exclusively as a bootstrap-only toolchain dependency (with GCC and binutils) to build the initial NullOS system before switching to musl. Not part of the final system.",
-    "version": "2.40",
-    "dependencies": [
-        "bison",
-        "python"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o glibc-2.40.tar.xz https://ftp.gnu.org/gnu/glibc/glibc-2.40.tar.xz",
-        "tar -xf glibc-2.40.tar.xz"
-    ],
-    "build": [
-        "mkdir -p glibc-2.40-build",
-        "cd glibc-2.40-build && ../glibc-2.40/configure --prefix=\"$PREFIX\" --disable-werror --enable-kernel=4.14",
-        "cd glibc-2.40-build && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd glibc-2.40-build && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "glibc",
+  "description": "GNU C Library, used exclusively as a bootstrap-only toolchain dependency (with GCC and binutils) to build the initial NullOS system before switching to musl. Not part of the final system.",
+  "version": "2.40",
+  "dependencies": [
+    "bison",
+    "python"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o glibc-2.40.tar.xz https://ftp.gnu.org/gnu/glibc/glibc-2.40.tar.xz",
+    "tar -xf glibc-2.40.tar.xz"
+  ],
+  "build": [
+    "mkdir -p glibc-2.40-build",
+    "cd glibc-2.40-build && ../glibc-2.40/configure --prefix=\"$PREFIX\" --disable-werror --enable-kernel=4.14",
+    "cd glibc-2.40-build && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd glibc-2.40-build && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

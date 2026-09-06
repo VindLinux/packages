@@ -1,19 +1,22 @@
 {
-    "name": "pciutils",
-    "description": "Collection of programs (lspci, setpci) and libpci library for inspecting and manipulating PCI devices, using hwdata's pci.ids database.",
-    "version": "3.13.0",
-    "dependencies": [
-        "hwdata",
-        "kmod"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o pciutils-3.13.0.tar.gz https://github.com/pciutils/pciutils/archive/refs/tags/v3.13.0.tar.gz",
-        "tar -xf pciutils-3.13.0.tar.gz"
-    ],
-    "build": [
-        "cd pciutils-3.13.0 && make $MAKEOPTS PREFIX=\"$PREFIX\" SHAREDIR=\"$PREFIX/share/hwdata\" ZLIB=no SHARED=yes"
-    ],
-    "install": [
-        "cd pciutils-3.13.0 && make install install-lib DESTDIR=\"$DESTDIR\" PREFIX=\"$PREFIX\" SHAREDIR=\"$PREFIX/share/hwdata\""
-    ]
+  "name": "pciutils",
+  "description": "Collection of programs (lspci, setpci) and libpci library for inspecting and manipulating PCI devices, using hwdata's pci.ids database.",
+  "version": "3.13.0",
+  "dependencies": [
+    "hwdata",
+    "kmod"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o pciutils-3.13.0.tar.gz https://github.com/pciutils/pciutils/archive/refs/tags/v3.13.0.tar.gz",
+    "tar -xf pciutils-3.13.0.tar.gz"
+  ],
+  "build": [
+    "cd pciutils-3.13.0 && make $MAKEOPTS PREFIX=\"$PREFIX\" SHAREDIR=\"$PREFIX/share/hwdata\" ZLIB=no SHARED=yes"
+  ],
+  "install": [
+    "cd pciutils-3.13.0 && make install install-lib DESTDIR=\"$DESTDIR\" PREFIX=\"$PREFIX\" SHAREDIR=\"$PREFIX/share/hwdata\""
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

@@ -1,22 +1,25 @@
 {
-    "name": "usbutils",
-    "description": "Collection of USB inspection utilities (lsusb, usb-devices) that use hwdata's usb.ids database, built on top of libusb.",
-    "version": "018",
-    "dependencies": [
-        "hwdata",
-        "meson",
-        "ninja",
-        "pkgconf"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o usbutils-018.tar.gz https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-018.tar.gz",
-        "tar -xf usbutils-018.tar.gz"
-    ],
-    "build": [
-        "meson setup usbutils-018/build usbutils-018 --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release --wrap-mode=nodownload -D udevdir=\"$PREFIX/lib/udev\"",
-        "ninja -C usbutils-018/build $MAKEOPTS"
-    ],
-    "install": [
-        "DESTDIR=\"$DESTDIR\" ninja -C usbutils-018/build install"
-    ]
+  "name": "usbutils",
+  "description": "Collection of USB inspection utilities (lsusb, usb-devices) that use hwdata's usb.ids database, built on top of libusb.",
+  "version": "018",
+  "dependencies": [
+    "hwdata",
+    "meson",
+    "ninja",
+    "pkgconf"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o usbutils-018.tar.gz https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-018.tar.gz",
+    "tar -xf usbutils-018.tar.gz"
+  ],
+  "build": [
+    "meson setup usbutils-018/build usbutils-018 --prefix=\"$PREFIX\" --libdir=\"$PREFIX/lib\" --buildtype=release --wrap-mode=nodownload -D udevdir=\"$PREFIX/lib/udev\"",
+    "ninja -C usbutils-018/build $MAKEOPTS"
+  ],
+  "install": [
+    "DESTDIR=\"$DESTDIR\" ninja -C usbutils-018/build install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

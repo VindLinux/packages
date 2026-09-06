@@ -1,28 +1,31 @@
 {
-    "name": "runit",
-    "description": "Cross-platform Unix init scheme with service supervision, providing service management via a minimal set of tools.",
-    "version": "2.3.1",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o runit-2.3.1.tar.gz https://smarden.org/runit/runit-2.3.1.tar.gz",
-        "tar -xf runit-2.3.1.tar.gz"
-    ],
-    "build": [
-        "cd admin/runit-2.3.1 && package/compile"
-    ],
-    "install": [
-        "cd admin/runit-2.3.1 && install -D -m 0755 command/chpst \"$DESTDIR$PREFIX/sbin/chpst\"",
-        "cd admin/runit-2.3.1 && install -D -m 0755 command/runit \"$DESTDIR$PREFIX/sbin/runit\"",
-        "cd admin/runit-2.3.1 && install -D -m 0755 command/runit-init \"$DESTDIR$PREFIX/sbin/runit-init\"",
-        "cd admin/runit-2.3.1 && install -D -m 0755 command/runsv \"$DESTDIR$PREFIX/sbin/runsv\"",
-        "cd admin/runit-2.3.1 && install -D -m 0755 command/runsvchdir \"$DESTDIR$PREFIX/sbin/runsvchdir\"",
-        "cd admin/runit-2.3.1 && install -D -m 0755 command/runsvdir \"$DESTDIR$PREFIX/sbin/runsvdir\"",
-        "cd admin/runit-2.3.1 && install -D -m 0755 command/sv \"$DESTDIR$PREFIX/sbin/sv\"",
-        "cd admin/runit-2.3.1 && install -D -m 0755 command/svlogd \"$DESTDIR$PREFIX/sbin/svlogd\"",
-        "cd admin/runit-2.3.1 && install -D -m 0755 command/utmpset \"$DESTDIR$PREFIX/sbin/utmpset\"",
-        "mkdir -p \"$DESTDIR/etc/runit/runsvdir/default\"",
-        "mkdir -p \"$DESTDIR/etc/service\"",
-        "mkdir -p \"$DESTDIR/sbin\"",
-        "ln -sf \"$PREFIX/sbin/runit-init\" \"$DESTDIR/sbin/init\""
-    ]
+  "name": "runit",
+  "description": "Cross-platform Unix init scheme with service supervision, providing service management via a minimal set of tools.",
+  "version": "2.3.1",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o runit-2.3.1.tar.gz https://smarden.org/runit/runit-2.3.1.tar.gz",
+    "tar -xf runit-2.3.1.tar.gz"
+  ],
+  "build": [
+    "cd admin/runit-2.3.1 && package/compile"
+  ],
+  "install": [
+    "cd admin/runit-2.3.1 && install -D -m 0755 command/chpst \"$DESTDIR$PREFIX/sbin/chpst\"",
+    "cd admin/runit-2.3.1 && install -D -m 0755 command/runit \"$DESTDIR$PREFIX/sbin/runit\"",
+    "cd admin/runit-2.3.1 && install -D -m 0755 command/runit-init \"$DESTDIR$PREFIX/sbin/runit-init\"",
+    "cd admin/runit-2.3.1 && install -D -m 0755 command/runsv \"$DESTDIR$PREFIX/sbin/runsv\"",
+    "cd admin/runit-2.3.1 && install -D -m 0755 command/runsvchdir \"$DESTDIR$PREFIX/sbin/runsvchdir\"",
+    "cd admin/runit-2.3.1 && install -D -m 0755 command/runsvdir \"$DESTDIR$PREFIX/sbin/runsvdir\"",
+    "cd admin/runit-2.3.1 && install -D -m 0755 command/sv \"$DESTDIR$PREFIX/sbin/sv\"",
+    "cd admin/runit-2.3.1 && install -D -m 0755 command/svlogd \"$DESTDIR$PREFIX/sbin/svlogd\"",
+    "cd admin/runit-2.3.1 && install -D -m 0755 command/utmpset \"$DESTDIR$PREFIX/sbin/utmpset\"",
+    "mkdir -p \"$DESTDIR/etc/runit/runsvdir/default\"",
+    "mkdir -p \"$DESTDIR/etc/service\"",
+    "mkdir -p \"$DESTDIR/sbin\"",
+    "ln -sf \"$PREFIX/sbin/runit-init\" \"$DESTDIR/sbin/init\""
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

@@ -46,5 +46,8 @@
     "ln -sf clang++ \"$DESTDIR$PREFIX/bin/c++\"",
     "ln -sf clang \"$DESTDIR$PREFIX/bin/gcc\"",
     "ln -sf clang++ \"$DESTDIR$PREFIX/bin/g++\""
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
   ]
 }

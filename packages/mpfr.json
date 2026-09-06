@@ -1,19 +1,22 @@
 {
-    "name": "mpfr",
-    "description": "GNU Multiple Precision Floating-Point Reliable Library, a required dependency for building GCC.",
-    "version": "4.2.2",
-    "dependencies": [
-        "gmp"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o mpfr-4.2.2.tar.xz https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.2.tar.xz",
-        "tar -xf mpfr-4.2.2.tar.xz"
-    ],
-    "build": [
-        "cd mpfr-4.2.2 && ./configure --prefix=\"$PREFIX\" --with-gmp=\"$PREFIX\"",
-        "cd mpfr-4.2.2 && make $MAKEOPTS"
-    ],
-    "install": [
-        "cd mpfr-4.2.2 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "mpfr",
+  "description": "GNU Multiple Precision Floating-Point Reliable Library, a required dependency for building GCC.",
+  "version": "4.2.2",
+  "dependencies": [
+    "gmp"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o mpfr-4.2.2.tar.xz https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.2.tar.xz",
+    "tar -xf mpfr-4.2.2.tar.xz"
+  ],
+  "build": [
+    "cd mpfr-4.2.2 && ./configure --prefix=\"$PREFIX\" --with-gmp=\"$PREFIX\"",
+    "cd mpfr-4.2.2 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd mpfr-4.2.2 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

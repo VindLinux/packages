@@ -1,17 +1,20 @@
 {
-    "name": "gmp",
-    "description": "GNU Multiple Precision Arithmetic Library, a required dependency for building GCC.",
-    "version": "6.3.0",
-    "dependencies": [],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o gmp-6.3.0.tar.xz https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz",
-        "tar -xf gmp-6.3.0.tar.xz"
-    ],
-    "build": [
-        "cd gmp-6.3.0 && CFLAGS=\"$CFLAGS -std=gnu17\" ./configure --prefix=\"$PREFIX\" --enable-cxx",
-        "cd gmp-6.3.0 && CFLAGS=\"$CFLAGS -std=gnu17\" make $MAKEOPTS"
-    ],
-    "install": [
-        "cd gmp-6.3.0 && make DESTDIR=\"$DESTDIR\" install"
-    ]
+  "name": "gmp",
+  "description": "GNU Multiple Precision Arithmetic Library, a required dependency for building GCC.",
+  "version": "6.3.0",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o gmp-6.3.0.tar.xz https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz",
+    "tar -xf gmp-6.3.0.tar.xz"
+  ],
+  "build": [
+    "cd gmp-6.3.0 && CFLAGS=\"$CFLAGS -std=gnu17\" ./configure --prefix=\"$PREFIX\" --enable-cxx",
+    "cd gmp-6.3.0 && CFLAGS=\"$CFLAGS -std=gnu17\" make $MAKEOPTS"
+  ],
+  "install": [
+    "cd gmp-6.3.0 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }

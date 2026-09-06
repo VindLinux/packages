@@ -1,21 +1,24 @@
 {
-    "name": "lld",
-    "description": "LLVM linker (lld), built as a standalone component against the already-installed LLVM 21.1.8, providing a modern non-GNU alternative to GNU ld.",
-    "version": "21.1.8",
-    "dependencies": [
-        "llvm",
-        "cmake",
-        "ninja"
-    ],
-    "download": [
-        "curl -fL --retry 3 --retry-delay 2 -o llvm-project-21.1.8.src.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/llvm-project-21.1.8.src.tar.xz",
-        "tar -xf llvm-project-21.1.8.src.tar.xz"
-    ],
-    "build": [
-        "cmake -G Ninja -S llvm-project-21.1.8.src/lld -B llvm-project-21.1.8.src/lld/build -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=\"$PREFIX\" -D LLVM_DIR=\"$PREFIX/lib/cmake/llvm\"",
-        "ninja -C llvm-project-21.1.8.src/lld/build $MAKEOPTS"
-    ],
-    "install": [
-        "DESTDIR=\"$DESTDIR\" ninja -C llvm-project-21.1.8.src/lld/build install"
-    ]
+  "name": "lld",
+  "description": "LLVM linker (lld), built as a standalone component against the already-installed LLVM 21.1.8, providing a modern non-GNU alternative to GNU ld.",
+  "version": "21.1.8",
+  "dependencies": [
+    "llvm",
+    "cmake",
+    "ninja"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o llvm-project-21.1.8.src.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/llvm-project-21.1.8.src.tar.xz",
+    "tar -xf llvm-project-21.1.8.src.tar.xz"
+  ],
+  "build": [
+    "cmake -G Ninja -S llvm-project-21.1.8.src/lld -B llvm-project-21.1.8.src/lld/build -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=\"$PREFIX\" -D LLVM_DIR=\"$PREFIX/lib/cmake/llvm\"",
+    "ninja -C llvm-project-21.1.8.src/lld/build $MAKEOPTS"
+  ],
+  "install": [
+    "DESTDIR=\"$DESTDIR\" ninja -C llvm-project-21.1.8.src/lld/build install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
 }
