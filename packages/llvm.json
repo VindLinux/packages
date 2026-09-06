@@ -45,7 +45,18 @@
     "ln -sf clang \"$DESTDIR$PREFIX/bin/cc\"",
     "ln -sf clang++ \"$DESTDIR$PREFIX/bin/c++\"",
     "ln -sf clang \"$DESTDIR$PREFIX/bin/gcc\"",
-    "ln -sf clang++ \"$DESTDIR$PREFIX/bin/g++\""
+    "ln -sf clang++ \"$DESTDIR$PREFIX/bin/g++\"",
+    "ln -sf llvm-ar \"$DESTDIR$PREFIX/bin/ar\"",
+    "ln -sf llvm-nm \"$DESTDIR$PREFIX/bin/nm\"",
+    "ln -sf llvm-ranlib \"$DESTDIR$PREFIX/bin/ranlib\"",
+    "ln -sf llvm-objcopy \"$DESTDIR$PREFIX/bin/objcopy\"",
+    "ln -sf llvm-objdump \"$DESTDIR$PREFIX/bin/objdump\"",
+    "ln -sf llvm-readelf \"$DESTDIR$PREFIX/bin/readelf\"",
+    "ln -sf llvm-strip \"$DESTDIR$PREFIX/bin/strip\"",
+    "ln -sf llvm-addr2line \"$DESTDIR$PREFIX/bin/addr2line\"",
+    "ln -sf llvm-size \"$DESTDIR$PREFIX/bin/size\"",
+    "ln -sf llvm-strings \"$DESTDIR$PREFIX/bin/strings\"",
+    "ln -sf ld.lld \"$DESTDIR$PREFIX/bin/ld\""
   ],
   "strip": [
     "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
