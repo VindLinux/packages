@@ -1,0 +1,17 @@
+{
+    "name": "clang-config",
+    "description": "System-wide Clang configuration file that makes clang++ default to -stdlib=libc++, since this musl-based toolchain has no GCC/libstdc++ and every C++ build must otherwise pass -stdlib=libc++ explicitly.",
+    "version": "1",
+    "dependencies": [
+        "llvm"
+    ],
+    "download": [],
+    "build": [
+        "mkdir -p clang-config",
+        "printf -- '-stdlib=libc++\\n' > clang-config/x86_64-unknown-linux-musl-clang++.cfg"
+    ],
+    "install": [
+        "install -d \"$DESTDIR/etc/clang\"",
+        "install -m 644 clang-config/x86_64-unknown-linux-musl-clang++.cfg \"$DESTDIR/etc/clang/x86_64-unknown-linux-musl-clang++.cfg\""
+    ]
+}
