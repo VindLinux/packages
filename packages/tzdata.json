@@ -6,13 +6,13 @@
     "download": [
         "curl -fL --retry 3 --retry-delay 2 -o tzdata2025b.tar.gz https://data.iana.org/time-zones/releases/tzdata2025b.tar.gz",
         "curl -fL --retry 3 --retry-delay 2 -o tzcode2025b.tar.gz https://data.iana.org/time-zones/releases/tzcode2025b.tar.gz",
-        "mkdir -p tzdata-2025b && tar -xf tzdata2025b.tar.gz -C tzdata-2025b",
-        "mkdir -p tzcode-2025b && tar -xf tzcode2025b.tar.gz -C tzcode-2025b"
+        "mkdir -p tzdata-2025b && tar -xf tzcode2025b.tar.gz -C tzdata-2025b",
+        "tar -xf tzdata2025b.tar.gz -C tzdata-2025b"
     ],
     "build": [
-        "cd tzcode-2025b && make zic",
+        "cd tzdata-2025b && make zic",
         "cd tzdata-2025b && mkdir -p zoneinfo",
-        "cd tzdata-2025b && ../tzcode-2025b/zic -d zoneinfo -L /dev/null africa antarctica asia australasia europe northamerica southamerica etcetera backward"
+        "cd tzdata-2025b && ./zic -d zoneinfo -L /dev/null africa antarctica asia australasia europe northamerica southamerica etcetera backward"
     ],
     "install": [
         "install -d \"$DESTDIR$PREFIX/share/zoneinfo\"",

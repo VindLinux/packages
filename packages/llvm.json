@@ -41,6 +41,10 @@
     "ninja -C llvm-project/llvm/build $MAKEOPTS"
   ],
   "install": [
-    "DESTDIR=\"$DESTDIR\" ninja -C llvm-project/llvm/build install"
+    "DESTDIR=\"$DESTDIR\" ninja -C llvm-project/llvm/build install",
+    "ln -sf clang \"$DESTDIR$PREFIX/bin/cc\"",
+    "ln -sf clang++ \"$DESTDIR$PREFIX/bin/c++\"",
+    "ln -sf clang \"$DESTDIR$PREFIX/bin/gcc\"",
+    "ln -sf clang++ \"$DESTDIR$PREFIX/bin/g++\""
   ]
 }

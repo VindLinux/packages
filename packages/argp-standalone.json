@@ -2,7 +2,7 @@
     "name": "argp-standalone",
     "description": "Hierarchical argument parsing library and error compatibility for musl",
     "version": "1.5.0",
-    "dependencies": [],
+    "dependencies": ["meson"],
     "download": [
         "curl -fL --retry 3 --retry-delay 2 -o argp-standalone-1.5.0.tar.gz https://github.com/argp-standalone/argp-standalone/archive/refs/tags/1.5.0.tar.gz",
         "tar -xf argp-standalone-1.5.0.tar.gz"
