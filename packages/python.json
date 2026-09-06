@@ -17,6 +17,7 @@
         "cd Python-3.13.7 && make $MAKEOPTS"
     ],
     "install": [
-        "cd Python-3.13.7 && make DESTDIR=\"$DESTDIR\" install"
+        "cd Python-3.13.7 && make DESTDIR=\"$DESTDIR\" install",
+        "cd Python-3.13.7 && ./python -m ensurepip --root=\"$DESTDIR\" --default-pip"
     ]
 }
