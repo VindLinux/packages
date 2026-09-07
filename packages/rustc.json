@@ -11,7 +11,7 @@
     "tar -xf rustc-1.93.1-src.tar.xz"
   ],
   "build": [
-    "cd rustc-1.93.1-src && cat > bootstrap.toml <<'BOOTSTRAP'\nchange-id = 148795\n\n[llvm]\ntargets = \"X86\"\n\n[build]\ndescription = \"for NullOS\"\ndocs = false\nlocked-deps = true\ntools = [\"cargo\", \"clippy\", \"rustdoc\", \"rustfmt\", \"src\"]\n\n[install]\nprefix = \"$PREFIX\"\ndocdir = \"share/doc/rustc-1.93.1\"\n\n[rust]\nchannel = \"stable\"\nlto = \"thin\"\ncodegen-units = 1\nllvm-bitcode-linker = false\nBOOTSTRAP\n./x.py build"
+    "cd rustc-1.93.1-src && cat > bootstrap.toml <<'BOOTSTRAP'\nchange-id = 148795\n\n[llvm]\ntargets = \"X86\"\n\n[build]\nbuild = \"x86_64-unknown-linux-musl\"\nhost = [\"x86_64-unknown-linux-musl\"]\ntarget = [\"x86_64-unknown-linux-musl\"]\ndescription = \"for Vind Linux\"\ndocs = false\nlocked-deps = true\ntools = [\"cargo\", \"clippy\", \"rustdoc\", \"rustfmt\", \"src\"]\n\n[install]\nprefix = \"$PREFIX\"\ndocdir = \"share/doc/rustc-1.93.1\"\n\n[rust]\nchannel = \"stable\"\nlto = \"thin\"\ncodegen-units = 1\nllvm-bitcode-linker = false\nBOOTSTRAP\n./x.py build"
   ],
   "install": [
     "cd rustc-1.93.1-src && DESTDIR=\"$DESTDIR\" ./x.py install"
