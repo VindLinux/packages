@@ -9,7 +9,7 @@
     "tar -xf toybox-0.8.12.tar.gz"
   ],
   "build": [
-    "cd toybox-0.8.12 && make defconfig && sed -i -e 's/^# CONFIG_AWK is not set/CONFIG_AWK=y/' -e 's/^# CONFIG_EXPR is not set/CONFIG_EXPR=y/' -e 's/^# CONFIG_TR is not set/CONFIG_TR=y/' .config && make clean && CC=x86_64-pc-linux-musl-gcc CFLAGS='--sysroot=/mnt/nullos' LDFLAGS='--sysroot=/mnt/nullos' make $MAKEOPTS"
+    "cd toybox-0.8.12 && make defconfig && sed -i -e 's/^# CONFIG_AWK is not set/CONFIG_AWK=y/' -e 's/^# CONFIG_EXPR is not set/CONFIG_EXPR=y/' -e 's/^# CONFIG_TR is not set/CONFIG_TR=y/' .config && make clean && CC=clang make $MAKEOPTS"
   ],
   "install": [
     "mkdir -p \"$DESTDIR$PREFIX/bin\"",

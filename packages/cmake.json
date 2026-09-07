@@ -14,7 +14,7 @@
   ],
   "build": [
     "cd cmake-4.2.3 && sed -i '/\"lib64\"/s/64//' Modules/GNUInstallDirs.cmake",
-    "cd cmake-4.2.3 && LD_LIBRARY_PATH=\"$PREFIX/lib\" CFLAGS=\"-pthread $CFLAGS\" CXXFLAGS=\"-pthread $CXXFLAGS\" LDFLAGS=\"-static-libstdc++ -static-libgcc -pthread $LDFLAGS\" ./bootstrap --prefix=\"$PREFIX\" --system-libs --mandir=/share/man --no-system-jsoncpp --no-system-cppdap --no-system-librhash --docdir=/share/doc/cmake-4.2.3",
+    "cd cmake-4.2.3 && LD_LIBRARY_PATH=\"$PREFIX/lib\" CFLAGS=\"-pthread $CFLAGS\" CXXFLAGS=\"-pthread $CXXFLAGS\" LDFLAGS=\"-pthread $LDFLAGS\" ./bootstrap --prefix=\"$PREFIX\" --system-libs --mandir=/share/man --no-system-jsoncpp --no-system-cppdap --no-system-librhash --docdir=/share/doc/cmake-4.2.3",
     "cd cmake-4.2.3 && make $MAKEOPTS"
   ],
   "install": [
