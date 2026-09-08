@@ -8,7 +8,7 @@
     "tar -xf ninja-1.13.2.tar.gz"
   ],
   "build": [
-    "cd ninja-1.13.2 && python3 configure.py --bootstrap"
+    "cd ninja-1.13.2 && CXX=\"$CXX\" CXXFLAGS=\"$CXXFLAGS -stdlib=libc++\" LDFLAGS=\"$LDFLAGS -stdlib=libc++\" python3 configure.py --bootstrap"
   ],
   "install": [
     "install -Dm755 ninja-1.13.2/ninja \"$DESTDIR$PREFIX/bin/ninja\""
