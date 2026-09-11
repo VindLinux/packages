@@ -8,6 +8,7 @@
     "tar -xf nasm-3.01.tar.xz"
   ],
   "build": [
+    "sed -i 's/-std=c23//' nasm-3.01/configure",
     "cd nasm-3.01 && ./configure --prefix=\"$PREFIX\"",
     "cd nasm-3.01 && make $MAKEOPTS"
   ],
