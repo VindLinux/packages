@@ -8,7 +8,8 @@
     "zstd",
     "scdoc",
     "ln",
-    "xz"
+    "xz",
+    "bash"
   ],
   "download": [
     "curl -fL --retry 3 --retry-delay 2 -o kmod-34.tar.gz https://github.com/kmod-project/kmod/archive/refs/tags/v34.tar.gz",
