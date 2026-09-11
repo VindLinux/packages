@@ -1,0 +1,20 @@
+{
+  "name": "mtools",
+  "description": "Collection of utilities to access MS-DOS/FAT disk images without mounting them, used by bootloaders such as Limine to build UEFI CD/FAT images.",
+  "version": "4.0.49",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o mtools-4.0.49.tar.gz https://ftp.gnu.org/gnu/mtools/mtools-4.0.49.tar.gz",
+    "tar -xf mtools-4.0.49.tar.gz"
+  ],
+  "build": [
+    "cd mtools-4.0.49 && ./configure --prefix=\"$PREFIX\" --disable-floppyd",
+    "cd mtools-4.0.49 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd mtools-4.0.49 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
+}

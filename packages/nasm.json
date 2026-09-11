@@ -1,0 +1,20 @@
+{
+  "name": "nasm",
+  "description": "The Netwide Assembler, a portable 80x86 assembler used to build the BIOS/legacy boot stages of bootloaders such as Limine.",
+  "version": "3.01",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o nasm-3.01.tar.xz https://www.nasm.us/pub/nasm/releasebuilds/3.01/nasm-3.01.tar.xz",
+    "tar -xf nasm-3.01.tar.xz"
+  ],
+  "build": [
+    "cd nasm-3.01 && ./configure --prefix=\"$PREFIX\"",
+    "cd nasm-3.01 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd nasm-3.01 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
+}

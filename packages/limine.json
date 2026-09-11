@@ -1,0 +1,23 @@
+{
+  "name": "limine",
+  "description": "Modern, portable, multiprotocol BIOS/UEFI bootloader and boot manager, used as an alternative to GRUB.",
+  "version": "12.8.0",
+  "dependencies": [
+    "mtools",
+    "nasm"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o limine-12.8.0.tar.gz https://github.com/Limine-Bootloader/Limine/releases/download/v12.8.0/limine-12.8.0.tar.gz",
+    "tar -xf limine-12.8.0.tar.gz"
+  ],
+  "build": [
+    "cd limine-12.8.0 && CC_FOR_TARGET=cc LD_FOR_TARGET=ld OBJCOPY_FOR_TARGET=objcopy OBJDUMP_FOR_TARGET=objdump READELF_FOR_TARGET=readelf ./configure --prefix=\"$PREFIX\" --enable-bios --enable-bios-cd --enable-uefi-cd --enable-bios-pxe --enable-uefi-ia32 --enable-uefi-x86-64 --docdir=\"$PREFIX/share/doc/limine-12.8.0\"",
+    "cd limine-12.8.0 && make $MAKEOPTS"
+  ],
+  "install": [
+    "cd limine-12.8.0 && make DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
+}
