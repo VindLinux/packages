@@ -1,0 +1,18 @@
+{
+  "name": "linux-firmware",
+  "description": "Collection of binary firmware blobs required by in-kernel drivers (wifi, GPU, network, etc).",
+  "version": "20260810",
+  "dependencies": [
+    "git"
+  ],
+  "download": [
+    "git clone --depth 1 --branch 20260810 https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git linux-firmware"
+  ],
+  "build": [],
+  "install": [
+    "cd linux-firmware && make DESTDIR=\"$DESTDIR\" FIRMWAREDIR=\"$PREFIX/lib/firmware\" install-zst"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
+}
