@@ -1,0 +1,22 @@
+{
+  "name": "jq",
+  "description": "Lightweight and flexible command-line JSON processor.",
+  "version": "1.8.2",
+  "dependencies": [
+    "oniguruma"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o jq-1.8.2.tar.gz https://github.com/jqlang/jq/releases/download/jq-1.8.2/jq-1.8.2.tar.gz",
+    "tar -xf jq-1.8.2.tar.gz"
+  ],
+  "build": [
+    "cd jq-1.8.2 && ./configure --prefix=\"$PREFIX\" --disable-maintainer-mode --disable-docs --with-oniguruma=yes",
+    "make -C jq-1.8.2 $MAKEOPTS"
+  ],
+  "install": [
+    "make -C jq-1.8.2 DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
+}

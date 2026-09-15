@@ -1,0 +1,20 @@
+{
+  "name": "oniguruma",
+  "description": "Regular expression library supporting multiple encodings and regex syntaxes (BRE, ERE, Perl, Python, Java, etc), used by jq, PHP mbstring, and Ruby's regex engine.",
+  "version": "6.9.10",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o onig-6.9.10.tar.gz https://github.com/kkos/oniguruma/releases/download/v6.9.10/onig-6.9.10.tar.gz",
+    "tar -xf onig-6.9.10.tar.gz"
+  ],
+  "build": [
+    "cd onig-6.9.10 && ./configure --prefix=\"$PREFIX\" --disable-static --enable-shared",
+    "make -C onig-6.9.10 $MAKEOPTS"
+  ],
+  "install": [
+    "make -C onig-6.9.10 DESTDIR=\"$DESTDIR\" install"
+  ],
+  "strip": [
+    "find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"
+  ]
+}
