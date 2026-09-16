@@ -1,0 +1,16 @@
+{
+  "name": "tmux",
+  "description": "Terminal multiplexer that enables multiple terminal sessions to be accessed and controlled from a single window, with session detach/reattach support.",
+  "version": "3.7c",
+  "dependencies": ["libevent", "ncurses"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o tmux-3.7c.tar.gz https://github.com/tmux/tmux/releases/download/3.7c/tmux-3.7c.tar.gz",
+    "tar -xf tmux-3.7c.tar.gz"
+  ],
+  "build": [
+    "cd tmux-3.7c && ./configure --prefix=\"$PREFIX\" --sysconfdir=/etc --enable-utf8proc",
+    "make -C tmux-3.7c $MAKEOPTS"
+  ],
+  "install": ["make -C tmux-3.7c DESTDIR=\"$DESTDIR\" install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

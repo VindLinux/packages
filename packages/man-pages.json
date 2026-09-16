@@ -1,0 +1,13 @@
+{
+  "name": "man-pages",
+  "description": "Linux man-pages project: manual pages for sections 2, 3, 4, 5, and 7 documenting the kernel and C library interfaces.",
+  "version": "6.18",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o man-pages-6.18.tar.xz https://www.kernel.org/pub/linux/docs/man-pages/man-pages-6.18.tar.xz",
+    "tar -xf man-pages-6.18.tar.xz"
+  ],
+  "build": [],
+  "install": ["make -C man-pages-6.18 DESTDIR=\"$DESTDIR$PREFIX\" install"],
+  "strip": []
+}

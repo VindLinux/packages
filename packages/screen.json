@@ -1,0 +1,19 @@
+{
+  "name": "screen",
+  "description": "GNU Screen, a full-screen terminal multiplexer that lets several processes (typically shells) run in one physical terminal, with session detach/reattach support.",
+  "version": "5.0.2",
+  "dependencies": ["ncurses"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o screen-5.0.2.tar.gz https://ftpmirror.gnu.org/screen/screen-5.0.2.tar.gz",
+    "tar -xf screen-5.0.2.tar.gz"
+  ],
+  "build": [
+    "cd screen-5.0.2 && ./configure --prefix=\"$PREFIX\" --sysconfdir=/etc --with-pty-mode=0620 --with-pty-group=5 --with-sys-screenrc=/etc/screenrc",
+    "make -C screen-5.0.2 $MAKEOPTS"
+  ],
+  "install": [
+    "make -C screen-5.0.2 DESTDIR=\"$DESTDIR\" install",
+    "install -m 644 screen-5.0.2/etc/etcscreenrc \"$DESTDIR/etc/screenrc\""
+  ],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

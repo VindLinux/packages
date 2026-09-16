@@ -1,0 +1,13 @@
+{
+  "name": "btop",
+  "description": "Resource monitor showing usage and stats for CPU, memory, disks, network, and processes, with a mouse-driven, themeable terminal UI (successor to bashtop/bpytop).",
+  "version": "1.4.7",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o btop-1.4.7.tar.gz https://github.com/aristocratos/btop/archive/refs/tags/v1.4.7.tar.gz",
+    "tar -xf btop-1.4.7.tar.gz"
+  ],
+  "build": ["make -C btop-1.4.7 $MAKEOPTS"],
+  "install": ["make -C btop-1.4.7 PREFIX=\"$PREFIX\" DESTDIR=\"$DESTDIR\" install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

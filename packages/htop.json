@@ -1,0 +1,16 @@
+{
+  "name": "htop",
+  "description": "Interactive process viewer for Unix systems, showing a scrollable, colorized list of processes with CPU/memory usage, load average, and support for killing/renicing without typing PIDs.",
+  "version": "3.5.3",
+  "dependencies": ["ncurses"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o htop-3.5.3.tar.xz https://github.com/htop-dev/htop/releases/download/3.5.3/htop-3.5.3.tar.xz",
+    "tar -xf htop-3.5.3.tar.xz"
+  ],
+  "build": [
+    "cd htop-3.5.3 && ./configure --prefix=\"$PREFIX\" --enable-unicode",
+    "make -C htop-3.5.3 $MAKEOPTS"
+  ],
+  "install": ["make -C htop-3.5.3 DESTDIR=\"$DESTDIR\" install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

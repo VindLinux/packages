@@ -1,0 +1,16 @@
+{
+  "name": "groff",
+  "description": "GNU troff document formatting system (groff), implementing troff, pic, eqn, tbl, and the man/mdoc/ms/mom macro packages. Required by man-db to render manual pages.",
+  "version": "1.24.1",
+  "dependencies": ["perl"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o groff-1.24.1.tar.gz https://ftp.gnu.org/gnu/groff/groff-1.24.1.tar.gz",
+    "tar -xf groff-1.24.1.tar.gz"
+  ],
+  "build": [
+    "cd groff-1.24.1 && PAGE=letter ./configure --prefix=\"$PREFIX\"",
+    "make -C groff-1.24.1 $MAKEOPTS"
+  ],
+  "install": ["make -C groff-1.24.1 DESTDIR=\"$DESTDIR\" install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

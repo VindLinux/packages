@@ -1,0 +1,16 @@
+{
+  "name": "man-db",
+  "description": "Implementation of the man command with an on-disk database (whatis/apropos) for fast manual page lookup; provides man, mandb, manpath, whatis, and apropos.",
+  "version": "2.13.1",
+  "dependencies": ["gdbm", "groff", "libpipeline", "zlib", "less", "flex"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o man-db-2.13.1.tar.xz https://download.savannah.nongnu.org/releases/man-db/man-db-2.13.1.tar.xz",
+    "tar -xf man-db-2.13.1.tar.xz"
+  ],
+  "build": [
+    "cd man-db-2.13.1 && ./configure --prefix=\"$PREFIX\" --docdir=\"$PREFIX/share/doc/man-db-2.13.1\" --sysconfdir=/etc --disable-setuid --enable-cache-owner=bin --with-browser=/usr/bin/lynx --with-vgrind=/usr/bin/vgrind --with-grap=/usr/bin/grap --without-systemdsystemunitdir",
+    "make -C man-db-2.13.1 $MAKEOPTS"
+  ],
+  "install": ["make -C man-db-2.13.1 DESTDIR=\"$DESTDIR\" install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

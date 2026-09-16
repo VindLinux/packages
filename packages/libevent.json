@@ -1,0 +1,16 @@
+{
+  "name": "libevent",
+  "description": "Asynchronous event notification library providing a mechanism to execute callbacks when file descriptors, timers, or signals become ready, using the best available OS backend (epoll, kqueue, select, etc). Used by tmux, memcached, and Tor.",
+  "version": "2.1.13",
+  "dependencies": ["openssl"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o libevent-2.1.13-stable.tar.gz https://github.com/libevent/libevent/releases/download/release-2.1.13-stable/libevent-2.1.13-stable.tar.gz",
+    "tar -xf libevent-2.1.13-stable.tar.gz"
+  ],
+  "build": [
+    "cd libevent-2.1.13-stable && ./configure --prefix=\"$PREFIX\" --disable-static",
+    "make -C libevent-2.1.13-stable $MAKEOPTS"
+  ],
+  "install": ["make -C libevent-2.1.13-stable DESTDIR=\"$DESTDIR\" install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

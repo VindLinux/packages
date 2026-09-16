@@ -1,0 +1,17 @@
+{
+  "name": "gdbm",
+  "description": "GNU dbm, a library of database functions using extensible hashing that stores key/value pairs in a flat file, similar to the classic UNIX dbm/ndbm. Required by man-db for its whatis/apropos index.",
+  "version": "1.25",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o gdbm-1.25.tar.gz https://ftp.gnu.org/gnu/gdbm/gdbm-1.25.tar.gz",
+    "tar -xf gdbm-1.25.tar.gz"
+  ],
+  "build": [
+    "cd gdbm-1.25 && ./configure --prefix=\"$PREFIX\" --disable-static --enable-libgdbm-compat",
+    "make -C gdbm-1.25 $MAKEOPTS"
+  ],
+  "install": ["make -C gdbm-1.25 DESTDIR=\"$DESTDIR\" install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}
+

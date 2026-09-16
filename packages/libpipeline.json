@@ -1,0 +1,16 @@
+{
+  "name": "libpipeline",
+  "description": "C library for setting up and running pipelines of subprocesses without going through shell command-line parsing, avoiding its quoting pitfalls and injection risks. Required by man-db to build its formatter pipelines (e.g. zsoelim | tbl | nroff).",
+  "version": "1.5.8",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o libpipeline-1.5.8.tar.gz https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.8.tar.gz",
+    "tar -xf libpipeline-1.5.8.tar.gz"
+  ],
+  "build": [
+    "cd libpipeline-1.5.8 && ./configure --prefix=\"$PREFIX\" --disable-static",
+    "make -C libpipeline-1.5.8 $MAKEOPTS"
+  ],
+  "install": ["make -C libpipeline-1.5.8 DESTDIR=\"$DESTDIR\" install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

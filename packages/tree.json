@@ -1,0 +1,14 @@
+{
+  "name": "tree",
+  "description": "Recursive directory listing tool that produces a depth-indented, optionally colorized tree of files and subdirectories.",
+  "version": "2.3.2",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o unix-tree-2.3.2.tar.bz2 https://gitlab.com/OldManProgrammer/unix-tree/-/archive/2.3.2/unix-tree-2.3.2.tar.bz2",
+    "mkdir -p tree-2.3.2",
+    "tar -xf unix-tree-2.3.2.tar.bz2 --strip-components=1 -C tree-2.3.2"
+  ],
+  "build": ["make -C tree-2.3.2 $MAKEOPTS PREFIX=\"$PREFIX\""],
+  "install": ["make -C tree-2.3.2 DESTDIR=\"$DESTDIR\" PREFIX=\"$PREFIX\" MANDIR=\"$PREFIX/share/man\" install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

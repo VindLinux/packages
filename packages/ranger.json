@@ -1,0 +1,14 @@
+{
+  "name": "ranger",
+  "description": "Console file manager with VI key bindings, a curses interface, file previews, and the rifle file launcher for automatic program selection by file type.",
+  "version": "1.9.4",
+  "dependencies": ["python"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o ranger-1.9.4.tar.gz https://ranger.fm/ranger-stable.tar.gz",
+    "mkdir -p ranger-1.9.4",
+    "tar -xf ranger-1.9.4.tar.gz --strip-components=1 -C ranger-1.9.4"
+  ],
+  "build": [],
+  "install": ["cd ranger-1.9.4 && python3 setup.py install --root=\"$DESTDIR\" --prefix=\"$PREFIX\" --optimize=1"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}
