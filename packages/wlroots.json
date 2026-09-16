@@ -1,0 +1,21 @@
+{
+  "name": "wlroots",
+  "description": "Modular library for building Wayland compositors, providing backends (KMS/DRM, libinput, X11, headless), renderers (GLES2, Vulkan, Pixman), and standalone implementations of many Wayland protocol interfaces. Used by Sway, Hyprland (fork), river, and others.",
+  "version": "0.20.1",
+  "dependencies": [
+    "wayland", "wayland-protocols", "libdrm", "mesa", "pixman", "libxkbcommon",
+    "libinput", "seatd", "systemd", "libxcb", "xcb-util-wm", "xcb-util-errors",
+    "xcb-util-renderutil", "vulkan-headers", "glslang", "libdisplay-info",
+    "libliftoff", "lcms2", "meson", "ninja"
+  ],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o wlroots-0.20.1.tar.gz https://gitlab.freedesktop.org/wlroots/wlroots/-/releases/0.20.1/downloads/wlroots-0.20.1.tar.gz",
+    "tar -xf wlroots-0.20.1.tar.gz"
+  ],
+  "build": [
+    "meson setup wlroots-0.20.1/build wlroots-0.20.1 --prefix=\"$PREFIX\" --buildtype=release -Dexamples=false -Dxwayland=enabled",
+    "ninja -C wlroots-0.20.1/build $MAKEOPTS"
+  ],
+  "install": ["DESTDIR=\"$DESTDIR\" ninja -C wlroots-0.20.1/build install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}
