@@ -4,7 +4,7 @@
   "version": "0.20.1",
   "dependencies": [
     "wayland", "wayland-protocols", "libdrm", "mesa", "pixman", "libxkbcommon",
-    "libinput", "seatd", "systemd", "libxcb", "xcb-util-wm", "xcb-util-errors",
+    "libinput", "seatd", "eudev", "libxcb", "xcb-util-wm", "xcb-util-errors",
     "xcb-util-renderutil", "vulkan-headers", "glslang", "libdisplay-info",
     "libliftoff", "lcms2", "meson", "ninja"
   ],
