@@ -1,0 +1,16 @@
+{
+  "name": "mtdev",
+  "description": "Multitouch Protocol Translation Library that normalizes all variants of kernel MT (multitouch) events, including type A without contact tracking, into the slotted type B protocol. Used by libinput to handle touchpads and touchscreens consistently.",
+  "version": "1.1.7",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o mtdev-1.1.7.tar.bz2 https://bitmath.org/code/mtdev/mtdev-1.1.7.tar.bz2",
+    "tar -xf mtdev-1.1.7.tar.bz2"
+  ],
+  "build": [
+    "cd mtdev-1.1.7 && ./configure --prefix=\"$PREFIX\" --disable-static",
+    "make -C mtdev-1.1.7 $MAKEOPTS"
+  ],
+  "install": ["make -C mtdev-1.1.7 DESTDIR=\"$DESTDIR\" install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

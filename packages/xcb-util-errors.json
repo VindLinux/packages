@@ -1,0 +1,16 @@
+{
+  "name": "xcb-util-errors",
+  "description": "XCB utility library that turns raw X11 error codes, event codes, and major/minor opcodes into human-readable names, used by compositors and debugging tools for diagnostics.",
+  "version": "1.0.1",
+  "dependencies": ["libxcb", "xorgproto"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o xcb-util-errors-1.0.1.tar.xz https://xcb.freedesktop.org/dist/xcb-util-errors-1.0.1.tar.xz",
+    "tar -xf xcb-util-errors-1.0.1.tar.xz"
+  ],
+  "build": [
+    "cd xcb-util-errors-1.0.1 && ./configure --prefix=\"$PREFIX\"",
+    "make -C xcb-util-errors-1.0.1 $MAKEOPTS"
+  ],
+  "install": ["make -C xcb-util-errors-1.0.1 DESTDIR=\"$DESTDIR\" install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

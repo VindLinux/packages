@@ -1,0 +1,16 @@
+{
+  "name": "seatd",
+  "description": "Minimal seat management daemon and library (libseat), mediating access to shared devices (GPU, input) without requiring compositor processes to run as root. Used by wlroots as a systemd-logind alternative, ideal for non-systemd distros.",
+  "version": "0.9.3",
+  "dependencies": ["meson", "ninja"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o seatd-0.9.3.tar.gz https://git.sr.ht/~kennylevinsen/seatd/archive/0.9.3.tar.gz",
+    "tar -xf seatd-0.9.3.tar.gz"
+  ],
+  "build": [
+    "meson setup seatd-0.9.3/build seatd-0.9.3 --prefix=\"$PREFIX\" --buildtype=release -Dlibseat-seatd=enabled -Dlibseat-logind=disabled -Dlibseat-builtin=enabled -Dserver=enabled -Dexamples=disabled -Dman-pages=disabled",
+    "ninja -C seatd-0.9.3/build $MAKEOPTS"
+  ],
+  "install": ["DESTDIR=\"$DESTDIR\" ninja -C seatd-0.9.3/build install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

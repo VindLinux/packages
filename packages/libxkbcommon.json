@@ -1,0 +1,16 @@
+{
+  "name": "libxkbcommon",
+  "description": "Keymap compiler and support library implementing the XKB (X Keyboard Extension) specification, used to translate raw key events into keysyms/characters. The standard keyboard-handling library on Wayland; also provides Compose/dead-key handling and a keyboard-layout registry.",
+  "version": "1.13.2",
+  "dependencies": ["meson", "ninja", "libxcb", "xkeyboard-config"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o libxkbcommon-1.13.2.tar.gz https://github.com/xkbcommon/libxkbcommon/archive/refs/tags/xkbcommon-1.13.2.tar.gz",
+    "tar -xf libxkbcommon-1.13.2.tar.gz"
+  ],
+  "build": [
+    "meson setup libxkbcommon-xkbcommon-1.13.2/build libxkbcommon-xkbcommon-1.13.2 --prefix=\"$PREFIX\" --buildtype=release -Denable-docs=false",
+    "ninja -C libxkbcommon-xkbcommon-1.13.2/build $MAKEOPTS"
+  ],
+  "install": ["DESTDIR=\"$DESTDIR\" ninja -C libxkbcommon-xkbcommon-1.13.2/build install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

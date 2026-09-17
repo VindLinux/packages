@@ -1,0 +1,16 @@
+{
+  "name": "lcms2",
+  "description": "Little CMS, a small-footprint color management engine providing fast transforms between ICC color profiles. Used by wlroots' Vulkan renderer for the color-management-v1 Wayland protocol (color range/encoding transforms).",
+  "version": "2.19.1",
+  "dependencies": [],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o lcms2-2.19.1.tar.gz https://github.com/mm2/Little-CMS/releases/download/lcms2.19.1/lcms2-2.19.1.tar.gz",
+    "tar -xf lcms2-2.19.1.tar.gz"
+  ],
+  "build": [
+    "cd lcms2-2.19.1 && ./configure --prefix=\"$PREFIX\" --disable-static",
+    "make -C lcms2-2.19.1 $MAKEOPTS"
+  ],
+  "install": ["make -C lcms2-2.19.1 DESTDIR=\"$DESTDIR\" install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

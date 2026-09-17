@@ -1,0 +1,16 @@
+{
+  "name": "xcb-util-wm",
+  "description": "XCB utility libraries for window-manager-related protocols: ICCCM (icccm) and Extended Window Manager Hints (ewmh), used by X11 window managers and by Xwayland-facing code in wlroots.",
+  "version": "0.4.2",
+  "dependencies": ["libxcb"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o xcb-util-wm-0.4.2.tar.gz https://xcb.freedesktop.org/dist/xcb-util-wm-0.4.2.tar.gz",
+    "tar -xf xcb-util-wm-0.4.2.tar.gz"
+  ],
+  "build": [
+    "cd xcb-util-wm-0.4.2 && ./configure --prefix=\"$PREFIX\"",
+    "make -C xcb-util-wm-0.4.2 $MAKEOPTS"
+  ],
+  "install": ["make -C xcb-util-wm-0.4.2 DESTDIR=\"$DESTDIR\" install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "libevdev",
+  "description": "Wrapper library for evdev input devices that abstracts common tasks (querying capabilities, reading events, SYN_DROPPED resync handling) behind a stable API, avoiding direct/erroneous ioctl use. Required by libinput to talk to kernel input devices.",
+  "version": "1.13.7",
+  "dependencies": ["meson", "ninja"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o libevdev-1.13.7.tar.xz https://www.freedesktop.org/software/libevdev/libevdev-1.13.7.tar.xz",
+    "tar -xf libevdev-1.13.7.tar.xz"
+  ],
+  "build": [
+    "meson setup libevdev-1.13.7/build libevdev-1.13.7 --prefix=\"$PREFIX\" --buildtype=release -Ddocumentation=disabled -Dtests=disabled",
+    "ninja -C libevdev-1.13.7/build $MAKEOPTS"
+  ],
+  "install": ["DESTDIR=\"$DESTDIR\" ninja -C libevdev-1.13.7/build install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

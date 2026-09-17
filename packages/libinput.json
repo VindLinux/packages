@@ -1,0 +1,16 @@
+{
+  "name": "libinput",
+  "description": "Input device handling library abstracting evdev devices (keyboards, mice, touchpads, touchscreens, tablets) behind a common event API, including pointer acceleration and gesture recognition. Used by Wayland compositors (via wlroots) and X.Org.",
+  "version": "1.31.0",
+  "dependencies": ["meson", "ninja", "eudev", "libevdev", "mtdev"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o libinput-1.31.0.tar.xz https://gitlab.freedesktop.org/libinput/libinput/-/archive/1.31.0/libinput-1.31.0.tar.gz",
+    "tar -xf libinput-1.31.0.tar.xz"
+  ],
+  "build": [
+    "meson setup libinput-1.31.0/build libinput-1.31.0 --prefix=\"$PREFIX\" --buildtype=release -Dlibwacom=false -Ddebug-gui=false -Dtests=false -Ddocumentation=false",
+    "ninja -C libinput-1.31.0/build $MAKEOPTS"
+  ],
+  "install": ["DESTDIR=\"$DESTDIR\" ninja -C libinput-1.31.0/build install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

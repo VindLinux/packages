@@ -1,0 +1,16 @@
+{
+  "name": "libliftoff",
+  "description": "Lightweight library that eases the use of KMS hardware overlay planes from userspace: compositors create virtual 'layers', set KMS properties on them, and libliftoff allocates real planes for them when possible, falling back to composition otherwise.",
+  "version": "0.5.0",
+  "dependencies": ["meson", "ninja", "libdrm"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o libliftoff-0.5.0.tar.gz https://gitlab.freedesktop.org/emersion/libliftoff/-/archive/v0.5.0/libliftoff-v0.5.0.tar.gz",
+    "tar -xf libliftoff-0.5.0.tar.gz"
+  ],
+  "build": [
+    "meson setup libliftoff-v0.5.0/build libliftoff-v0.5.0 --prefix=\"$PREFIX\" --buildtype=release",
+    "ninja -C libliftoff-v0.5.0/build $MAKEOPTS"
+  ],
+  "install": ["DESTDIR=\"$DESTDIR\" ninja -C libliftoff-v0.5.0/build install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

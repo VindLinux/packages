@@ -1,0 +1,16 @@
+{
+  "name": "libdisplay-info",
+  "description": "Library for parsing and interpreting EDID and DisplayID monitor descriptor blobs, exposing display name, supported modes, and color characteristics. Used by wlroots' DRM backend to query connected display capabilities.",
+  "version": "0.3.0",
+  "dependencies": ["meson", "ninja"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o libdisplay-info-0.3.0.tar.bz2 https://gitlab.freedesktop.org/emersion/libdisplay-info/-/archive/0.3.0/libdisplay-info-0.3.0.tar.bz2",
+    "tar -xf libdisplay-info-0.3.0.tar.bz2"
+  ],
+  "build": [
+    "meson setup libdisplay-info-0.3.0/build libdisplay-info-0.3.0 --prefix=\"$PREFIX\" --buildtype=release",
+    "ninja -C libdisplay-info-0.3.0/build $MAKEOPTS"
+  ],
+  "install": ["DESTDIR=\"$DESTDIR\" ninja -C libdisplay-info-0.3.0/build install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

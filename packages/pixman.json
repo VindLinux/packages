@@ -1,0 +1,16 @@
+{
+  "name": "pixman",
+  "description": "Low-level pixel manipulation library providing image compositing and trapezoid rasterization (Porter-Duff operators, affine/projective transforms), used as the rendering backbone for Cairo, X.Org, and wlroots' Pixman software renderer.",
+  "version": "0.46.4",
+  "dependencies": ["meson", "ninja"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o pixman-0.46.4.tar.gz https://www.cairographics.org/releases/pixman-0.46.4.tar.gz",
+    "tar -xf pixman-0.46.4.tar.gz"
+  ],
+  "build": [
+    "meson setup pixman-0.46.4/build pixman-0.46.4 --prefix=\"$PREFIX\" --buildtype=release -Dtests=disabled",
+    "ninja -C pixman-0.46.4/build $MAKEOPTS"
+  ],
+  "install": ["DESTDIR=\"$DESTDIR\" ninja -C pixman-0.46.4/build install"],
+  "strip": ["find \"$DESTDIR$PREFIX\" -type f -exec sh -c 'file \"$1\" | grep -q \"ELF\" && strip --strip-unneeded \"$1\"' _ {} \\; 2>/dev/null || true"]
+}

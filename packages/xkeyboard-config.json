@@ -1,0 +1,15 @@
+{
+  "name": "xkeyboard-config",
+  "description": "Database of keyboard layouts, models, and options for the X Keyboard Extension (XKB), consumed at runtime by libxkbcommon to resolve layout names (e.g. 'us', 'br-abnt2') into actual keymaps. Data-only package, no compiled binaries.",
+  "version": "2.48",
+  "dependencies": ["meson", "ninja"],
+  "download": [
+    "curl -fL --retry 3 --retry-delay 2 -o xkeyboard-config-2.48.tar.xz https://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.48.tar.xz",
+    "tar -xf xkeyboard-config-2.48.tar.xz"
+  ],
+  "build": [
+    "meson setup xkeyboard-config-2.48/build xkeyboard-config-2.48 --prefix=\"$PREFIX\" --buildtype=release",
+    "ninja -C xkeyboard-config-2.48/build $MAKEOPTS"
+  ],
+  "install": ["DESTDIR=\"$DESTDIR\" ninja -C xkeyboard-config-2.48/build install"],
+ 
