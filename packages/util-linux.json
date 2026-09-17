@@ -9,7 +9,8 @@
     "ncurses",
     "bash",
     "pam",
-    "sqlite3"
+    "sqlite3",
+    "ln"
   ],
   "download": [
     "curl -fL --retry 3 --retry-delay 2 -o util-linux-2.40.2.tar.gz https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-2.40.2.tar.gz",
